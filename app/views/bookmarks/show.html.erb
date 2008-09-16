@@ -1,0 +1,23 @@
+<p>
+  <b>Section:</b>
+  <%=h @bookmark.section_id %>
+</p>
+
+<p>
+  <b>Nth from top of section:</b>
+  <%=h @bookmark.nth_from_top_of_section %>
+</p>
+
+<p>
+  <b>Legend:</b>
+  <%=h @bookmark.legend %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%=h @bookmark.image %>
+</p>
+
+
+<%= link_to 'Edit', edit_bookmark_path(@bookmark) %> |
+<%= link_to 'Back', bookmarks_path %>

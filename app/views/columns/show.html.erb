@@ -1,0 +1,13 @@
+<p>
+  <b>Webpage:</b>
+  <%=h @column.webpage_id %>
+</p>
+
+<p>
+  <b>Nth from left:</b>
+  <%=h @column.nth_from_left %>
+</p>
+
+
+<%= link_to 'Edit', edit_column_path(@column) %> |
+<%= link_to 'Back', columns_path %>

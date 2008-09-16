@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  section_id: 1
+  nth_from_top_of_section: 1
+  legend: MyString
+  image: MyString
+
+two:
+  section_id: 1
+  nth_from_top_of_section: 1
+  legend: MyString
+  image: MyString

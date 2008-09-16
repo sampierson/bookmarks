@@ -1,0 +1,19 @@
+<h1>New column</h1>
+
+<% form_for(@column) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :webpage_id %><br />
+    <%= f.text_field :webpage_id %>
+  </p>
+  <p>
+    <%= f.label :nth_from_left %><br />
+    <%= f.text_field :nth_from_left %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', columns_path %>
