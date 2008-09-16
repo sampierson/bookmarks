@@ -1,0 +1,11 @@
+%table{ :border => 1 }
+  %tr
+    - @page.columns.each do |column|
+      %td
+        - column.sections.each do |section|
+          %b
+            = section.title
+          %br
+          - section.bookmarks.each do |bookmark|
+            = bookmark.legend
+            %br
