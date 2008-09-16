@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20080916185313) do
   end
 
   create_table "webpages", :force => true do |t|
-    t.string   "url"
+    t.string   "url",        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
