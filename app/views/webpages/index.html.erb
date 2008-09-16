@@ -11,6 +11,15 @@
     <td><%= link_to 'Show', webpage %></td>
     <td><%= link_to 'Edit', edit_webpage_path(:id => webpage) %></td>
     <td><%= link_to 'Destroy', webpage, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      webpages_path <%= webpages_path %><br>
+      new_webpage_path <%= new_webpage_path %><br>
+      create_webpage_path <%= create_webpage_path %><br>
+      webpage_path <%= webpage_path(:id => webpage) %><br>
+      edit_webpage_path <%= edit_webpage_path(:id => webpage) %><br>
+      update_webpage_path <%= update_webpage_path(:id => webpage) %><br>
+      delete_webpage_path <%= delete_webpage_path(:id => webpage) %><br>
+    </td>
   </tr>
 <% end %>
 </table>
@@ -19,13 +28,3 @@
 
 <%= link_to 'New webpage', new_webpage_path %>
 
-<br>
-<br>
-<%= webpages_path %><br>
-<%= new_webpage_path %><br>
-<%= create_webpage_path %><br>
-<%= url_for( { :controller => 'webpages', :action => 'new', :site => 'foo' } ) %><br>
-<%= url_for( { :action => 'new', :site => 'foo' } ) %><br>
-<%= url_for( { :action => 'new' } ) %><br>
-<%= new_webpage_path %><br>
-<%= url_for( { :controller => 'webpages', :action => 'edit', :site => 'foo', :id => 3 } ) %>

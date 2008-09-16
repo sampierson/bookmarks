@@ -1,4 +1,5 @@
 class WebpagesController < ApplicationController
+  
   # GET /webpages
   # GET /webpages.xml
   def index
@@ -62,7 +63,7 @@ class WebpagesController < ApplicationController
     respond_to do |format|
       if @webpage.update_attributes(params[:webpage])
         flash[:notice] = 'Webpage was successfully updated.'
-        format.html { redirect_to(@webpage) }
+        format.html { redirect_to(:id => @webpage) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
