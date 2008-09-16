@@ -1,7 +1,5 @@
 class CreateWebpages < ActiveRecord::Migration
   
-  validates_presence_of :url
-  
   def self.up
     create_table :webpages do |t|
       t.string :url, :null => false
