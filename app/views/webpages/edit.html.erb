@@ -1,6 +1,6 @@
 <h1>Editing webpage</h1>
 
-<% form_for(@webpage, :url => update_webpage_path(:id => @webpage)) do |f| %>
+<% form_for(@webpage, :url => webpage_path(:id => @webpage)) do |f| %>
   <%= f.error_messages %>
 
   <p>

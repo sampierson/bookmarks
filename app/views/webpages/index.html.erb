@@ -8,18 +8,9 @@
 <% for webpage in @webpages %>
   <tr>
     <td><%=h webpage.url %></td>
-    <td><%= link_to 'Show', webpage_path(:id => webpage) %></td>
-    <td><%= link_to 'Edit', edit_webpage_path(:id => webpage) %></td>
-    <td><%= link_to 'Destroy', delete_webpage_path(:id => webpage), :confirm => 'Are you sure?', :method => :delete %></td>
-    <td>
-      webpages_path <%= webpages_path %><br>
-      new_webpage_path <%= new_webpage_path %><br>
-      create_webpage_path <%= create_webpage_path %><br>
-      webpage_path <%= webpage_path(:id => webpage) %><br>
-      edit_webpage_path <%= edit_webpage_path(:id => webpage) %><br>
-      update_webpage_path <%= update_webpage_path(:id => webpage) %><br>
-      delete_webpage_path <%= delete_webpage_path(:id => webpage) %><br>
-    </td>
+    <td><%= link_to 'Show', webpage_path(webpage) %></td>
+    <td><%= link_to 'Edit', edit_webpage_path(webpage) %></td>
+    <td><%= link_to 'Destroy', webpage_path(webpage), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -7,7 +7,7 @@ Structure
   page ->
     columns ->
       sections ->
-        links
+        bookmarks
         
 User experience:
 
@@ -56,5 +56,44 @@ Integration
   editing entities done via bookmarks.sampierson.com/homeloangoddess.com/edit ?
   or                                                                    /column
   
-  Authentication? Add users later.
-  
+Authentication?
+  Add later.
+  Cookie based sessions.
+  Signup.
+
+Routes
+
+  http://bookmarks.com/:site                 GET       Display page
+                                                       If page does not exist,
+                                                       redirect to /new
+                      /:site/webpage/new     GET       Authenticate, perform signup
+                                                       Ask if user wants to create this page
+                            /webpage/create  POST-Ajax Create DB entries - page, column, section
+                                                       Ajax.upate page contents with display()
+                                     
+                                     show,edit,update,delete    Do not really have a lot of meaning here.
+                                                                Webpage has no user editable content.
+                                                                Unless we add aliases?
+                                                                
+                      ^ may truncate /webpage/new to /new. similary for create.
+                      
+                      /:site/column/new      POST      Webpage will have buttons to add columns
+                                                                before, inbetween and after current columns.
+                                             insert-before/1
+                                             insert-after/1
+                                             
+                      /:site/column/<c>/section/new
+                      /:site/column/<c>/section/create
+                      /:site/column/<c>/section/insert-above/1
+                      /:site/column/<c>/section/insert-below/1
+                      /:site/column/<c>/section/<s>/edit
+                      /:site/column/<c>/section/<s>/update
+                      /:site/column/<c>/section/<s>/destroy
+                      
+                      /:site/column/<c>/section/<s>/bookmark/new
+                      /:site/column/<c>/section/<s>/bookmark/create
+                      /:site/column/<c>/section/<s>/bookmark/insert-above/1
+                      /:site/column/<c>/section/<s>/bookmark/insert-below/1
+                      /:site/column/<c>/section/<s>/bookmark/<b>/edit
+                      /:site/column/<c>/section/<s>/bookmark/<b>/update
+                      /:site/column/<c>/section/<s>/bookmark/<b>/destroy

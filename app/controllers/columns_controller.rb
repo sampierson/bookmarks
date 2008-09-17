@@ -2,8 +2,7 @@ class ColumnsController < ApplicationController
   # GET /columns
   # GET /columns.xml
   def index
-    @columns = Column.find(:all)
-
+    @columns = Webpage.find(params[:webpage_id]).columns
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @columns }
