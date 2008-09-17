@@ -1,0 +1,22 @@
+%h1
+  Webpage
+  =h @column.webpage.url
+%h2
+  Column
+  = @column.nth_from_left
+  
+%table
+  %tr
+    %th Nth section from top
+    %th Title
+  - @column.sections.each do |section|
+    %tr
+      %td=h section.nth_section_from_top
+      %td=h section.title
+      %td= link_to 'Show', webpage_column_section_path(@webpage, @column, section)
+      %td= link_to 'Edit', edit_webpage_column_section_path(@webpage, @column, section)
+      %td= link_to 'Destroy', webpage_column_section_path(@webpage, @column, section), :confirm => 'Are you sure?', :method => :delete
+  %tr
+    %td= link_to 'New section', new_webpage_column_section_path(@webpage, @column)
+%br
+= link_to "Back to #{@webpage.url}", webpage_path(@webpage)

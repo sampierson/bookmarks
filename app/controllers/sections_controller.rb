@@ -1,19 +1,17 @@
 class SectionsController < ApplicationController
+  
+  before_filter :find_column
+  
   # GET /sections
   # GET /sections.xml
   def index
-    @sections = Section.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @sections }
-    end
+    # SAM Remove
   end
 
   # GET /sections/1
   # GET /sections/1.xml
   def show
-    @section = Section.find(params[:id])
+    @section = @column.sections.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +22,7 @@ class SectionsController < ApplicationController
   # GET /sections/new
   # GET /sections/new.xml
   def new
-    @section = Section.new
+    @section = @column.sections.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,18 +32,18 @@ class SectionsController < ApplicationController
 
   # GET /sections/1/edit
   def edit
-    @section = Section.find(params[:id])
+    @section = @column.sections.find(params[:id])
   end
 
   # POST /sections
   # POST /sections.xml
   def create
-    @section = Section.new(params[:section])
+    @section = @column.sections.build(params[:section])
 
     respond_to do |format|
       if @section.save
         flash[:notice] = 'Section was successfully created.'
-        format.html { redirect_to(@section) }
+        format.html { redirect_to webpage_column_path(@webpage, @column) }
         format.xml  { render :xml => @section, :status => :created, :location => @section }
       else
         format.html { render :action => "new" }
@@ -62,7 +60,7 @@ class SectionsController < ApplicationController
     respond_to do |format|
       if @section.update_attributes(params[:section])
         flash[:notice] = 'Section was successfully updated.'
-        format.html { redirect_to(@section) }
+        format.html { redirect_to webpage_column_path(@webpage, @column) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -78,8 +76,16 @@ class SectionsController < ApplicationController
     @section.destroy
 
     respond_to do |format|
-      format.html { redirect_to(sections_url) }
+      format.html { redirect_to webpage_column_path(@webpage, @column) }
       format.xml  { head :ok }
     end
   end
+  
+  private
+  
+  def find_column
+    @webpage = Webpage.find(params[:webpage_id])
+    @column = @webpage.columns.find(params[:column_id])
+  end
+  
 end

@@ -1,0 +1,23 @@
+%h3
+  Webpage
+  = @webpage.url
+%h2
+  Column
+  = @column.nth_from_left
+%h1 New section
+
+- form_for(@section, :url => webpage_column_sections_path(@webpage, @column)) do |f|
+  = f.error_messages
+
+  %p
+    = f.label :nth_section_from_top
+    %br
+    = f.text_field :nth_section_from_top
+  %p
+    = f.label :title
+    %br
+    = f.text_field :title
+  %p
+    = f.submit "Create"
+
+= link_to "Back to #{@webpage.url} column #{@column.nth_from_left}", webpage_column_path(@webpage, @column)

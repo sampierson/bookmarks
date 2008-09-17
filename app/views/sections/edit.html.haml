@@ -1,0 +1,25 @@
+%h3
+  Webpage
+  = @webpage.url
+%h2
+  Column
+  = @column.nth_from_left
+%h1
+  Section
+  = @section.title
+  = "(#{@section.nth_section_from_top})"
+
+- form_for(@section, :url => webpage_column_section_path(@webpage, @column), :method => :put) do |f|
+  = f.error_messages
+  %p
+    = f.label :nth_section_from_top
+    %br
+    = f.text_field :nth_section_from_top
+  %p
+    = f.label :title 
+    %br
+    = f.text_field :title
+  %p
+    = f.submit "Update"
+
+= link_to "Back to #{@webpage.url} column #{@column.nth_from_left}", webpage_column_path(@webpage, @column)

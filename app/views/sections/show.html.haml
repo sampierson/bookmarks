@@ -1,0 +1,15 @@
+%h3
+  Webpage
+  = @webpage.url
+%h2
+  Column
+  = @column.nth_from_left
+%h1
+  Section
+  = "#{@section.nth_section_from_top}:"
+  = @section.title
+
+
+= link_to 'Edit', edit_webpage_column_section_path(@webpage, @column, @section)
+|
+= link_to "Back to #{@webpage.url} column #{@column.nth_from_left}", webpage_column_path(@webpage, @column)

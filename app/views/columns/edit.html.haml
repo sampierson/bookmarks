@@ -1,0 +1,17 @@
+%h1
+  Webpage
+  = @webpage.url
+%h2
+  Column
+  = @column.nth_from_left
+  
+- form_for(@column, :url => webpage_column_path(@webpage), :method => :put) do |f|
+  = f.error_messages
+  %p
+    = f.label :nth_from_left
+    %br
+    = f.text_field :nth_from_left
+  %p
+    = f.submit "Update"
+
+= link_to 'Back', webpage_path(@webpage)

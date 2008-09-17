@@ -1,0 +1,15 @@
+%h2
+  Webpage
+  = @webpage.url
+%h1 New Column
+
+- form_for(@column, :url => webpage_columns_path(@webpage)) do |f|
+  = f.error_messages
+  %p
+    = f.label :nth_from_left
+    %br
+    = f.text_field :nth_from_left
+
+  %p
+    = f.submit "Create"
+= link_to 'Back', webpage_path(@webpage)

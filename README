@@ -30,6 +30,8 @@ User experience:
 
     Popup a little window that has Name, Image and URL in-place-edit fields.
 
+  Admin Interface
+    A Web-1.0 way of examining and editing all pages.
 
 Database
   WebPage
@@ -75,7 +77,7 @@ Routes
                                                                 Webpage has no user editable content.
                                                                 Unless we add aliases?
                                                                 
-                      ^ may truncate /webpage/new to /new. similary for create.
+                      ^ may truncate /webpage/new to /new. simirlarly for create.
                       
                       /:site/column/new      POST      Webpage will have buttons to add columns
                                                                 before, inbetween and after current columns.

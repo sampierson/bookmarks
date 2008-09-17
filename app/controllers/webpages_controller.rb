@@ -3,7 +3,6 @@ class WebpagesController < ApplicationController
   # GET /site/webpages
   # GET /site/webpages.xml
   def index
-    puts "In index()"
     @webpages = Webpage.find(:all)
 
     respond_to do |format|
@@ -15,7 +14,7 @@ class WebpagesController < ApplicationController
   # GET /site/webpages/1
   # GET /site/webpages/1.xml
   def show
-    @webpage = Webpage.find(params[:id])
+    @webpage = Webpage.find(params[:id], :include => :columns)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,7 +46,7 @@ class WebpagesController < ApplicationController
     respond_to do |format|
       if @webpage.save
         flash[:notice] = 'Webpage was successfully created.'
-        format.html { redirect_to(:id => @webpage) }
+        format.html { redirect_to(@webpage) }
         format.xml  { render :xml => @webpage, :status => :created, :location => @webpage }
       else
         format.html { render :action => "new" }
@@ -64,7 +63,7 @@ class WebpagesController < ApplicationController
     respond_to do |format|
       if @webpage.update_attributes(params[:webpage])
         flash[:notice] = 'Webpage was successfully updated.'
-        format.html { redirect_to(:id => @webpage) }
+        format.html { redirect_to(@webpage) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -1,0 +1,17 @@
+%h1
+  Webpage
+  =h @webpage.url
+%table
+  %tr
+    %th Column
+  - @webpage.columns.each do |column|
+    %tr
+      %td= column.nth_from_left
+      %td= link_to 'Show', webpage_column_path(@webpage, column)
+      %td= link_to 'Edit', edit_webpage_column_path(@webpage, column)
+      %td= link_to 'Destroy', webpage_column_path(@webpage, column), :confirm => 'Are you sure?', :method => :delete
+  %tr
+    %td= link_to 'New column', new_webpage_column_path(@webpage)
+      
+%br
+= link_to 'Back to all webpages', webpages_path
