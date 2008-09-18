@@ -1,5 +1,7 @@
 class BookmarksController < ApplicationController
 
+  layout 'admin'
+  
   before_filter :find_section
   
   # GET /bookmarks

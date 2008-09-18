@@ -1,5 +1,7 @@
 class ColumnsController < ApplicationController
 
+  layout 'admin'
+
   before_filter :find_webpage
   
   # GET /columns

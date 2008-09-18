@@ -1,5 +1,7 @@
 class SectionsController < ApplicationController
   
+  layout 'admin'
+  
   before_filter :find_column
   
   # GET /sections

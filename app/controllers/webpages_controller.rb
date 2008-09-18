@@ -1,5 +1,7 @@
 class WebpagesController < ApplicationController
   
+  layout 'admin', :except => :display_page
+  
   # GET /site/webpages
   # GET /site/webpages.xml
   def index
