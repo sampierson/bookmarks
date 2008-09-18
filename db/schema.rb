@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20080916185313) do
     t.integer  "section_id"
     t.integer  "nth_from_top_of_section"
     t.string   "legend"
+    t.string   "url"
     t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"

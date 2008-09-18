@@ -12,11 +12,13 @@
   %tr
     %th Order
     %th Legend
+    %th URL
     %th Image
   - @section.bookmarks.each do |bookmark|
     %tr
       %td=h bookmark.nth_from_top_of_section
       %td=h bookmark.legend
+      %td=h bookmark.url
       %td=h bookmark.image
       %td= link_to 'Edit', edit_webpage_column_section_bookmark_path(@webpage, @column, @section, bookmark)
       %td= link_to 'Destroy', webpage_column_section_bookmark_path(@webpage, @column, @section, bookmark), :confirm => 'Are you sure?', :method => :delete

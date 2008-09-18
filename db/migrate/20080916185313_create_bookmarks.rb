@@ -4,6 +4,7 @@ class CreateBookmarks < ActiveRecord::Migration
       t.integer :section_id
       t.integer :nth_from_top_of_section
       t.string :legend
+      t.string :url
       t.string :image
 
       t.timestamps
