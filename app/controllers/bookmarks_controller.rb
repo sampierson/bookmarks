@@ -3,18 +3,6 @@ class BookmarksController < ApplicationController
   layout 'admin'
   
   before_filter :find_section
-  
-  # GET /bookmarks
-  # GET /bookmarks.xml
-  def index
-    # SAM Nuke
-  end
-
-  # GET /bookmarks/1
-  # GET /bookmarks/1.xml
-  def show
-    # SAM Nuke
-  end
 
   # GET /bookmarks/new
   # GET /bookmarks/new.xml

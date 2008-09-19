@@ -14,12 +14,19 @@ class WebpagesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:webpages)
-    assert_select 'div#canvas table#webpagesTable' do
-      assert_select 'tr td.webpageUrl', "webpage_1"
-      assert_select 'tr td.webpageUrl', "webpage_2"
-      # TBD check for action links here too.
+    assert_select 'div#canvas' do
+      assert_select 'table#webpagesTable' do
+        # Check for known webpages
+        Webpage.all.each do |page|
+          assert_select 'td.webpageUrl', page.url
+          # Check for action links
+          assert_select "td.rowAction a[href=#{webpage_path(page)}]", "Show"
+          assert_select "td.rowAction a[href=#{edit_webpage_path(page)}]", "Edit"
+          assert_select "td.rowAction a[href=#{webpage_path(page)}]", "Destroy"
+        end
+      end
     end
-    assert_select 'div#newWebpage'
+    assert_select "div#newWebpage a[href=#{new_webpage_path}]"
   end
   
   def test_should_get_new
@@ -38,8 +45,19 @@ class WebpagesControllerTest < ActionController::TestCase
   def test_should_show_webpage
     get :show, :id => @w.id
     assert_response :success
-    # SAM look for known columns
-    # SAM look for "New Column" link
+    assert_select 'div#canvas' do
+      assert_select 'table#columnsTable' do
+        # Check for known columns
+        @w.columns.each do |column|
+          assert_select 'td.columnNthFromLeft', "#{column.nth_from_left}"
+          # Check for action links
+          assert_select "td.rowAction a[href=#{webpage_column_path(@w,column)}]", "Show"
+          assert_select "td.rowAction a[href=#{edit_webpage_column_path(@w,column)}]", "Edit"
+          assert_select "td.rowAction a[href=#{webpage_column_path(@w,column)}]", "Destroy"
+        end
+      end
+    end
+    assert_select "td#newColumn a[href=#{new_webpage_column_path(@w)}]"
   end
   
   def test_should_get_edit
@@ -52,7 +70,7 @@ class WebpagesControllerTest < ActionController::TestCase
   
   def test_should_update_webpage
     put :update, :id => @w.id, :webpage => { :url => "foo" }
-    assert_redirected_to webpage_path(@w)
+    assert_redirected_to webpages_path
   end
   
   def test_should_destroy_webpage

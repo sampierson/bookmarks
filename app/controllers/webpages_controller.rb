@@ -65,7 +65,7 @@ class WebpagesController < ApplicationController
     respond_to do |format|
       if @webpage.update_attributes(params[:webpage])
         flash[:notice] = 'Webpage was successfully updated.'
-        format.html { redirect_to(@webpage) }
+        format.html { redirect_to webpages_path }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

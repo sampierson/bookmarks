@@ -35,14 +35,23 @@ class SectionsControllerTest < ActionController::TestCase
   def test_should_show_section
     get :show, :webpage_id => @w.id, :column_id => @c.id, :id => @s.id
     assert_response :success
-    # check for known bookmarks
-    assert_select '#canvas table' do
-      @s.bookmarks.each do |bookmark|
-        # SAM needs work
+    assert_select 'div#canvas' do
+      assert_select 'table#bookmarksTable' do
+        # Check for known bookmarks
+        @s.bookmarks.each do |bookmark|
+          assert_select 'td.bookmarkNthFromTopOfSection', bookmark.nth_from_top_of_section.to_s
+          assert_select 'td.bookmarkLegend', bookmark.legend
+          assert_select 'td.bookmarkUrl', bookmark.url.to_s
+          assert_select 'td.bookmarkImage', bookmark.image.to_s
+          # Check for action links
+          assert_select "td.rowAction a[href=#{edit_webpage_column_section_bookmark_path(@w,@c,@s,bookmark)}]", "Edit"
+          assert_select "td.rowAction a[href=#{webpage_column_section_bookmark_path(@w,@c,@s,bookmark)}]", "Destroy"
+        end
       end
     end
+    assert_select "td#newBookmark a[href=#{new_webpage_column_section_bookmark_path(@w,@c,@s)}]"
   end
-
+  
   def test_should_get_edit
     get :edit, :webpage_id => @w.id, :column_id => @c.id, :id => @s.id
     assert_response :success

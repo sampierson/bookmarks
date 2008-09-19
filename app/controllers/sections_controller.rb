@@ -3,12 +3,6 @@ class SectionsController < ApplicationController
   layout 'admin'
   
   before_filter :find_column
-  
-  # GET /sections
-  # GET /sections.xml
-  def index
-    # SAM Remove
-  end
 
   # GET /sections/1
   # GET /sections/1.xml

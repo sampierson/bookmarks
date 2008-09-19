@@ -9,6 +9,12 @@ Features to include:
   LiveValidation?
   Page caching.
   RDOC
+  
+TODO
+  Write official CSS id/class naming policy.
+  Align ids.
+  Send unimplemented actions somewhere? back to preceeding controller?
+  What to do when a page/column etc does not exist.
 
 Structure
   page ->

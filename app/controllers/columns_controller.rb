@@ -3,11 +3,6 @@ class ColumnsController < ApplicationController
   layout 'admin'
 
   before_filter :find_webpage
-  
-  # GET /columns
-  # GET /columns.xml
-  def index
-  end
 
   # GET /columns/1
   # GET /columns/1.xml

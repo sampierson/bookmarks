@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class BookmarksControllerTest < ActionController::TestCase
-  # Index method is not implemented for sections.
-  # Show method is not implemented for sections.
+  # Index method is not implemented for bookmarks.
+  # Show method is not implemented for bookmarks.
   # SAM how to check this?
   
   def setup

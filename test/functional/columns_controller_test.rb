@@ -34,15 +34,22 @@ class ColumnsControllerTest < ActionController::TestCase
   def test_should_show_column
     get :show, :webpage_id => @w.id, :id => @c.id
     assert_response :success
-    # check for known sections
-    assert_select '#canvas table' do
-      @c.sections.each do |section|
-        # SAM needs work
-        # assert_select 'tr td.sectionNthSectionFromTop', section.nth_section_from_top
+    assert_select 'div#canvas' do
+      assert_select 'table#sectionsTable' do
+        # Check for known sections
+        @c.sections.each do |section|
+          assert_select 'td.sectionNthSectionFromTop', "#{section.nth_section_from_top}"
+          assert_select 'td.sectionTitle', "#{section.title}"
+          # Check for action links
+          assert_select "td.rowAction a[href=#{webpage_column_section_path(@w,@c,section)}]", "Show"
+          assert_select "td.rowAction a[href=#{edit_webpage_column_section_path(@w,@c,section)}]", "Edit"
+          assert_select "td.rowAction a[href=#{webpage_column_section_path(@w,@c,section)}]", "Destroy"
+        end
       end
     end
+    assert_select "td#newSection a[href=#{new_webpage_column_section_path(@w,@c)}]"
   end
-
+  
   def test_should_get_edit
     get :edit, :webpage_id => @w.id, :id => @c.id
     assert_response :success
