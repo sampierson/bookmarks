@@ -5,9 +5,11 @@ class CreateWebpages < ActiveRecord::Migration
       t.string :url, :null => false
       t.timestamps
     end
+    add_index :webpages, :url
   end
 
   def self.down
     drop_table :webpages
   end
+  
 end

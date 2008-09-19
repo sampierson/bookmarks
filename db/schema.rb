@@ -21,12 +21,16 @@ ActiveRecord::Schema.define(:version => 20080916185313) do
     t.datetime "updated_at"
   end
 
+  add_index "bookmarks", ["section_id"], :name => "index_bookmarks_on_section_id"
+
   create_table "columns", :force => true do |t|
     t.integer  "webpage_id",    :null => false
     t.integer  "nth_from_left", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "columns", ["webpage_id"], :name => "index_columns_on_webpage_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "column_id",            :null => false
@@ -36,10 +40,14 @@ ActiveRecord::Schema.define(:version => 20080916185313) do
     t.datetime "updated_at"
   end
 
+  add_index "sections", ["column_id"], :name => "index_sections_on_column_id"
+
   create_table "webpages", :force => true do |t|
     t.string   "url",        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "webpages", ["url"], :name => "index_webpages_on_url"
 
 end
