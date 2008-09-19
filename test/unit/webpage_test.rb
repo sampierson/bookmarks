@@ -9,12 +9,12 @@ class WebpageTest < ActiveSupport::TestCase
   end
   
   def test_we_can_retrieve_webpage
-    w = Webpage.find_by_url('the_test_webpage')
+    w = Webpage.find_by_url('webpage_1')
     assert_not_nil w
   end
   
   def test_webpage_has_many_columns
-    w = Webpage.find_by_url('the_test_webpage')
+    w = Webpage.find_by_url('webpage_1')
     assert_not_nil w
     assert_equal 2, w.columns.count
   end

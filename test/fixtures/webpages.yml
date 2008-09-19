@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  url: the_test_webpage
+page_1:
+  url: webpage_1
 
-two:
-  url: MyStringTwo
+page_2:
+  url: webpage_2

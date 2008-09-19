@@ -76,7 +76,7 @@ class ColumnsController < ApplicationController
     @column.destroy
 
     respond_to do |format|
-      format.html { redirect_to(columns_url) }
+      format.html { redirect_to webpage_path(@webpage) }
       format.xml  { head :ok }
     end
   end

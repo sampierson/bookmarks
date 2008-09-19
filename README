@@ -8,6 +8,7 @@ Features to include:
   restful_authentication
   LiveValidation?
   Page caching.
+  RDOC
 
 Structure
   page ->

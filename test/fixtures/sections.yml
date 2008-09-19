@@ -1,11 +1,21 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  column: one
+page_1_col_1_sec_1:
+  column: page_1_col_1
   nth_section_from_top: 1
-  title: MyString
+  title: page_1_col_1_sec_1
 
-two:
-  column: one
+page_1_col_1_sec_2:
+  column: page_1_col_1
   nth_section_from_top: 2
-  title: MyString
+  title: page_1_col_1_sec_2
+
+page_1_col_2_sec_1:
+  column: page_1_col_2
+  nth_section_from_top: 1
+  title: page_1_col_2_sec_1
+  
+page_2_col_1_sec_1:
+  column: page_2_col_1
+  nth_section_from_top: 1
+  title: page_2_col_1_sec_1

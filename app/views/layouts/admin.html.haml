@@ -8,5 +8,9 @@
       = controller.controller_name
     = stylesheet_link_tag 'scaffold'
   %body
-    %p{ :style =>"color: green" }= flash[:notice]
-    = yield
+    #masthead
+    #mainstage
+      #flash
+        %p{ :style =>"color: green" }= flash[:notice]
+      #canvas
+        = yield

@@ -47,4 +47,48 @@ class Test::Unit::TestCase
     end
   end
   
+  # Test restful routing for a resource.
+  # Arguments:
+  #   path_prefix     String  common element of URL path e.g. /thingeys
+  #   object                  An object of this resource type to use in the tests.
+  #   common_results  Hash    Results that will be common, e.g. { :controller => 'thingeys' }
+  #
+  # Replaces this:
+  # new
+  # assert_routing({ :path => "/admin/webpages/#{w.id}/columns/new", :method => :get },
+  #                { :controller => 'columns', :action => 'new', :webpage_id => w.id.to_s })
+  # # create
+  # assert_routing({ :path => "/admin/webpages/#{w.id}/columns", :method => :post },
+  #                { :controller => 'columns', :action => 'create', :webpage_id => w.id.to_s })
+  # # show
+  # assert_routing({ :path => "/admin/webpages/#{w.id}/columns/#{c.id}", :method => :get },
+  #                { :controller => 'columns', :action => 'show', :webpage_id => w.id.to_s, :id => c.id.to_s})
+  # # edit
+  # assert_routing({ :path => "/admin/webpages/#{w.id}/columns/#{c.id}/edit", :method => :get },
+  #                { :controller => 'columns', :action => 'edit', :webpage_id => w.id.to_s, :id => c.id.to_s })
+  # # update
+  # assert_routing({ :path => "/admin/webpages/#{w.id}/columns/#{c.id}", :method => :put },
+  #                { :controller => 'columns', :action => 'update', :webpage_id => w.id.to_s, :id => c.id.to_s })
+  # # delete
+  # assert_routing({ :path => "/admin/webpages/#{w.id}/columns/#{c.id}", :method => :delete },
+  #                { :controller => 'columns', :action => 'destroy', :webpage_id => w.id.to_s, :id => c.id.to_s })
+                 
+  def assert_restful_routing(path_prefix, object, common_results, routes_to_test = nil)
+    routes = {
+      'index'   => { :verb => :get,    :path_suffix => "",                   :results => {} },
+      'new'     => { :verb => :get,    :path_suffix => "/new",               :results => {} },
+      'create'  => { :verb => :post,   :path_suffix => "",                   :results => {} },
+      'show'    => { :verb => :get,    :path_suffix => "/#{object.id}",      :results => { :id => object.id.to_s } },
+      'edit'    => { :verb => :get,    :path_suffix => "/#{object.id}/edit", :results => { :id => object.id.to_s } },
+      'update'  => { :verb => :put,    :path_suffix => "/#{object.id}",      :results => { :id => object.id.to_s } },
+      'destroy' => { :verb => :delete, :path_suffix => "/#{object.id}",      :results => { :id => object.id.to_s } },
+    }
+    routes_to_test = routes.keys if routes_to_test.nil?
+    routes_to_test.each do |action|
+      path = { :path => (path_prefix + routes[action][:path_suffix]), :method => routes[action][:verb] }
+      options = { :action => action }.merge(common_results).merge(routes[action][:results])
+      assert_routing(path, options)
+    end
+  end
+  
 end

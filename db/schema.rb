@@ -12,9 +12,9 @@
 ActiveRecord::Schema.define(:version => 20080916185313) do
 
   create_table "bookmarks", :force => true do |t|
-    t.integer  "section_id"
-    t.integer  "nth_from_top_of_section"
-    t.string   "legend"
+    t.integer  "section_id",              :null => false
+    t.integer  "nth_from_top_of_section", :null => false
+    t.string   "legend",                  :null => false
     t.string   "url"
     t.string   "image"
     t.datetime "created_at"
@@ -22,16 +22,16 @@ ActiveRecord::Schema.define(:version => 20080916185313) do
   end
 
   create_table "columns", :force => true do |t|
-    t.integer  "webpage_id"
-    t.integer  "nth_from_left"
+    t.integer  "webpage_id",    :null => false
+    t.integer  "nth_from_left", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "sections", :force => true do |t|
-    t.integer  "column_id"
-    t.integer  "nth_section_from_top"
-    t.string   "title"
+    t.integer  "column_id",            :null => false
+    t.integer  "nth_section_from_top", :null => false
+    t.string   "title",                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
