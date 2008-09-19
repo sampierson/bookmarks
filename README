@@ -3,6 +3,12 @@ RAILS_BOOKMARKS
 How to rewrite my homepage in Rails, Web 2.0 Style.
 This is an exercise in exercising Ajax.
 
+Features to include:
+  Ajax editing page.
+  restful_authentication
+  LiveValidation?
+  Page caching.
+
 Structure
   page ->
     columns ->
@@ -11,6 +17,10 @@ Structure
         
 User experience:
 
+  Page
+    Allow you to pick background?
+    Javascript color picker?
+    
   First time: starts with an empty page that says:
     To start constructing your page:
       [add a column]

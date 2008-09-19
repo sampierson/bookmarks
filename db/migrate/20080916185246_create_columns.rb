@@ -1,8 +1,8 @@
 class CreateColumns < ActiveRecord::Migration
   def self.up
     create_table :columns do |t|
-      t.integer :webpage_id
-      t.integer :nth_from_left
+      t.integer :webpage_id, :null => false
+      t.integer :nth_from_left, :null => false
 
       t.timestamps
     end

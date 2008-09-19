@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class WebpagesControllerTest < ActionController::TestCase
+  
   def test_should_get_index
     get :index
     assert_response :success
@@ -14,7 +15,7 @@ class WebpagesControllerTest < ActionController::TestCase
 
   def test_should_create_webpage
     assert_difference('Webpage.count') do
-      post :create, :webpage => { }
+      post :create, :webpage => { :url => "foo" }
     end
 
     assert_redirected_to webpage_path(assigns(:webpage))

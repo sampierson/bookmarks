@@ -1,9 +1,9 @@
 class CreateBookmarks < ActiveRecord::Migration
   def self.up
     create_table :bookmarks do |t|
-      t.integer :section_id
-      t.integer :nth_from_top_of_section
-      t.string :legend
+      t.integer :section_id, :null => false
+      t.integer :nth_from_top_of_section, :null => false
+      t.string :legend, :null => false
       t.string :url
       t.string :image
 

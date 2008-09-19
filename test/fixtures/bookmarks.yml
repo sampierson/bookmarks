@@ -1,13 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  section_id: 1
+  section_id: one
   nth_from_top_of_section: 1
   legend: MyString
+  url: foo
   image: MyString
 
 two:
-  section_id: 1
+  section_id: one
   nth_from_top_of_section: 1
   legend: MyString
+  url: bar
   image: MyString

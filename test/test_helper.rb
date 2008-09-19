@@ -35,4 +35,16 @@ class Test::Unit::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  
+  def assert_not_valid(record)
+      assert (not record.valid?), "#{record.class.name} was valid when it wasn't supposed to be"
+  end
+  
+  # Assert this ActiveRecord model has errors on the listed attributes.
+  def assert_errors_on(model, *attrs)
+    attrs.each do |attr|
+      assert model.errors.on(attr), "Expected error on attribute #{attr.to_s} but it was clean"
+    end
+  end
+  
 end

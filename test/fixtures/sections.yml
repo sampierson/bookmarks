@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  column_id: 1
+  column: one
   nth_section_from_top: 1
   title: MyString
 
 two:
-  column_id: 1
-  nth_section_from_top: 1
+  column: one
+  nth_section_from_top: 2
   title: MyString
