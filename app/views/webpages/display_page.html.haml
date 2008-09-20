@@ -1,11 +1,12 @@
-%table{ :border => 1 }
-  %tr
-    - @page.columns.each do |column|
-      %td
-        - column.sections.each do |section|
-          %b
-            = section.title
-          %br
-          - section.bookmarks.each do |bookmark|
-            = bookmark.legend
-            %br
+- @page.columns.each do |column|
+  = column.id
+  %div[nil, column.dom_id]
+    - column.sections.each do |section|
+      %div{ :id => section.dom_id }
+        %b= section.title
+        %ul
+        - section.bookmarks.each do |bookmark|
+          %li{ :id => bookmark.dom_id }
+            %a{ :href => bookmark.url }
+              = bookmark.legend
+              

@@ -4,6 +4,14 @@ class Bookmark < ActiveRecord::Base
   validates_presence_of :legend
   validate :section_must_exist
   
+  
+  # Generates a DOM ID we can use to manipulate this entity when it is in the HTML page.
+  def dom_id
+    "column_#{column.nth_from_left}_section_#{nth_section_from_top}_bookmark_#{nth_from_top_of_section}"
+  end
+  
+  private
+  
   def section_must_exist
     errors.add(:section_id, "must refer to an existing section") if section.nil?
   end
