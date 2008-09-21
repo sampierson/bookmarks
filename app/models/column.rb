@@ -7,7 +7,7 @@ class Column < ActiveRecord::Base
   
   # Generates a DOM ID we can use to manipulate this entity when it is in the HTML page.
   def dom_id
-    "column_#{nth_from_left}"
+    "column_#{id}"
   end
   
   private

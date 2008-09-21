@@ -11,7 +11,7 @@ class Section < ActiveRecord::Base
 
   # Generates a DOM ID we can use to manipulate this entity when it is in the HTML page.
   def dom_id
-    column.dom_id + "_section_#{nth_section_from_top}"
+    "section_#{id}"
   end
   
   private

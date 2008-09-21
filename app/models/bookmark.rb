@@ -7,7 +7,7 @@ class Bookmark < ActiveRecord::Base
   
   # Generates a DOM ID we can use to manipulate this entity when it is in the HTML page.
   def dom_id
-    section.dom_id + "_bookmark_#{nth_from_top_of_section}"
+    "bookmark_#{id}"
   end
   
   private
