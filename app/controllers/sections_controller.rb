@@ -1,87 +1,70 @@
 class SectionsController < ApplicationController
   
   layout 'admin'
-  
-  before_filter :find_column
+  before_filter :find_column_via_webpage, :only => [ :show, :new, :edit, :create, :update, :destroy ]
+  before_filter :find_section_via_site, :only => [ :set_title ]
 
-  # GET /sections/1
-  # GET /sections/1.xml
+  # REST scaffold actions
+  
   def show
     @section = @column.sections.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @section }
-    end
   end
 
-  # GET /sections/new
-  # GET /sections/new.xml
   def new
     @section = @column.sections.build
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @section }
-    end
   end
 
-  # GET /sections/1/edit
   def edit
     @section = @column.sections.find(params[:id])
   end
 
-  # POST /sections
-  # POST /sections.xml
   def create
     @section = @column.sections.build(params[:section])
-
-    respond_to do |format|
-      if @section.save
-        flash[:notice] = 'Section was successfully created.'
-        format.html { redirect_to webpage_column_path(@webpage, @column) }
-        format.xml  { render :xml => @section, :status => :created, :location => @section }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @section.errors, :status => :unprocessable_entity }
-      end
+    if @section.save
+      flash[:notice] = 'Section was successfully created.'
+      redirect_to webpage_column_path(@webpage, @column)
+    else
+      render :action => "new"
     end
   end
 
-  # PUT /sections/1
-  # PUT /sections/1.xml
   def update
     @section = Section.find(params[:id])
-
-    respond_to do |format|
-      if @section.update_attributes(params[:section])
-        flash[:notice] = 'Section was successfully updated.'
-        format.html { redirect_to webpage_column_path(@webpage, @column) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @section.errors, :status => :unprocessable_entity }
-      end
+    if @section.update_attributes(params[:section])
+      flash[:notice] = 'Section was successfully updated.'
+      redirect_to webpage_column_path(@webpage, @column)
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /sections/1
-  # DELETE /sections/1.xml
   def destroy
     @section = Section.find(params[:id])
     @section.destroy
-
-    respond_to do |format|
-      format.html { redirect_to webpage_column_path(@webpage, @column) }
-      format.xml  { head :ok }
-    end
+    redirect_to webpage_column_path(@webpage, @column)
   end
   
+  # Ajax actions
+  
+  # in_place_edit_for :section, :title
+  def set_title
+    @section.update_attribute(:title, params[:value])
+    render :text => @section.send(:title).to_s
+  end
+    
   private
   
-  def find_column
+  def find_column_via_webpage
     @webpage = Webpage.find(params[:webpage_id])
     @column = @webpage.columns.find(params[:column_id])
   end
   
+  def find_section_via_site
+    @page = Webpage.find_by_url(params[:site])
+    @section = Section.find(:first,
+      :select => 's.*',
+      :from => 'sections AS s, columns AS c',
+      :conditions => [ 's.id = ? AND s.column_id = c.id AND c.webpage_id = ?', params[:id], @page.id ] )
+  end
+    
 end

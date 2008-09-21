@@ -116,3 +116,7 @@ Routes
                       /:site/column/<c>/section/<s>/bookmark/<b>/edit
                       /:site/column/<c>/section/<s>/bookmark/<b>/update
                       /:site/column/<c>/section/<s>/bookmark/<b>/destroy
+
+Rendering
+  _column partial
+  when inserting or moving a column, rerender it using the partial?
