@@ -18,5 +18,5 @@
       %td.rowAction= link_to 'Destroy', webpage_column_section_path(@webpage, @column, section), :confirm => 'Are you sure?', :method => :delete
   %tr
     %td#newSection= link_to 'New section', new_webpage_column_section_path(@webpage, @column)
-%br
+%br/
 = link_to "Back to #{@webpage.url}", webpage_path(@webpage)
