@@ -120,3 +120,10 @@ Routes
 Rendering
   _column partial
   when inserting or moving a column, rerender it using the partial?
+  
+  
+  
+There is a fundamental tension between the /admin interface and the :site interface.
+We want to, say, set the title of a section:
+  Admin interface: /admin/webpages/x/columns/y/sections/z/set_section_title
+  Regular interface: :site/sections/x/set_title

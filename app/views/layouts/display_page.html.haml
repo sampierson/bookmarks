@@ -2,7 +2,7 @@
 !!! 1.0 Transitional
 %html
   %head
-    %meta{ 'http-equiv' => "content-type", :content => "text/html;charset=UTF-8" }
+    %meta{ 'http-equiv' => "content-type", :content => "text/html;charset=UTF-8" }/
     %title
       Bookmarks:
       = controller.controller_name
@@ -12,6 +12,9 @@
     #masthead
     #mainstage
       #flash
-        %p{ :style =>"color: green" }= flash[:notice]
+        - [ :error, :warning, :notice ].each do |level|
+          - unless flash[level].blank?
+            %div{ :class => "flash-#{level}" }
+              = flash[level]
       #canvas
         = yield

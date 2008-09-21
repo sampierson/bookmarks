@@ -3,21 +3,19 @@ ActionController::Routing::Routes.draw do |map|
   # Administrative interface.
   map.resources :webpages, :path_prefix => '/admin' do |webpage|
     webpage.resources :columns do |column|
-      column.resources :sections do |section|
-        
+      column.resources :sections do |section|        
         section.resources :bookmarks
-        section.connect ':id/set_section_title2', :conditions => { :method => :post }, :controller => 'sections', :action => 'set_section_title'
       end
-      column.connect '/sections/:id/set_section_title', :conditions => { :method => :post }, :controller => 'sections', :action => 'set_section_title'
     end
   end
   
   # Regular interface.
   # This displays the actual page, e.g.  http://boogmargz.com/samsbookmarks
   map.with_options :requirements => { :site => /[^\/]*/ } do |route|
-    route.display_webpage ':site/', :conditions => { :method => :get }, :controller => 'webpages', :action => 'display_page'
+    route.display_webpage   ':site/', :conditions => { :method => :get }, :controller => 'webpages', :action => 'display_page'
     # The Ajax routes
-    route.drop_section      ':site/columns/:column_id/drop_section', :conditions => { :method => :post }, :controller => 'columns', :action => 'drop_section'
+    #route.drop_section      ':site/columns/:column_id/drop_section', :conditions => { :method => :post }, :controller => 'columns', :action => 'drop_section'
+    route.sort_sections     ':site/columns/:column_id/sort_sections', :conditions => { :method => :post }, :controller => 'columns', :action => 'sort_sections'
     route.set_section_title ':site/sections/:id/set_title', :conditions => { :method => :post }, :controller => 'sections', :action => 'set_title'
   end
   

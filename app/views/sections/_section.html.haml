@@ -1,10 +1,10 @@
-.section{ :id => section.dom_id }
+%li.section{ :id => section.dom_id }
   - section_title_id = section.dom_id + "_title"
-  %b
+  .section_title
     = section_title_in_place_editor(section)
-  %ul
-    - section.bookmarks.each do |bookmark|
-      %li{ :id => bookmark.dom_id }
-        %a{ :href => bookmark.url }
-          = bookmark.legend
-= draggable_element(section.dom_id, :ghosting=>true, :revert=>true)
+  - if section.bookmarks.count > 0
+    %ul
+      - section.bookmarks.each do |bookmark|
+        %li{ :id => bookmark.dom_id }
+          %a{ :href => bookmark.url }
+            = bookmark.legend
