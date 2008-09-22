@@ -94,10 +94,6 @@ class ColumnsController < ApplicationController
       end
     end
     @new_column = @webpage.columns.create(:nth_from_left => inserting_at_position)
-    # Kinda an obvious message. Let's just leave it in for debugging.
-    #render :update do |page|
-    # ajax_flash_message page, "Inserted new column at position #{inserting_at_position}"
-    #end
   end
   
   def delete_column
