@@ -2,7 +2,8 @@ class ColumnsController < ApplicationController
 
   layout 'admin'
 
-  before_filter :find_webpage, :only => [ :show, :new, :edit, :create, :update, :destroy ]
+  before_filter :find_webpage,       :only => [ :show, :new, :edit, :create, :update, :destroy ]
+  before_filter :find_page_via_site, :only => [ :sort_sections, :insert_column_before, :delete_column ]
 
   # REST CRUD actions
   
@@ -69,47 +70,56 @@ class ColumnsController < ApplicationController
   # Parameters are:
   #  'column_id' => x
   #  'column_x'  => [ array of section IDs ]
+  # Note we can get called for a column that is now empty.
   def sort_sections
-    find_page_via_site
-    column = @page.columns.find(params[:column_id])
+    column = @page.columns.find(params[:id])
     nth_from_top = 1
     moved_section = nil
-    params[column.dom_id].each do |section_id|
-      # SAM Check sections belongs in this page.
-      section = Section.find(section_id)
-      if section.column_id != column.id
-        moved_section = section
-        section.column_id = column.id
+    unless params[column.dom_id].blank?
+      params[column.dom_id].each do |section_id|
+        # SAM Check sections belongs in this page.
+        section = Section.find(section_id)
+        if section.column_id != column.id
+          @moved_section = section
+          section.column_id = column.id
+        end
+        section.nth_section_from_top = nth_from_top
+        section.save!
+        nth_from_top += 1
       end
-      section.nth_section_from_top = nth_from_top
-      section.save!
-      nth_from_top += 1
-    end
-    # Scriptaculous has already reordered these in the page for us.
-    # If a column didn't used to be here, send a flash message.
-    if moved_section
-      render :update do |page|
-        page.replace_html 'flash', "<div class=flash-notice>"+
-                                   "Section #{moved_section.title} moved to column #{moved_section.column.nth_from_left}"+
-                                   "</div>"
-        page.visual_effect(:appear, 'flash', :duration => 1)
-        #page.visual_effect(:blind_down, 'flash', :duration => 1)
-        page.visual_effect(:fade, 'flash', :delay => 5, :duration => 1)
-        page.visual_effect(:blind_up, 'flash', :delay => 5, :duration => 1)
-#        flash_id = Time.now.strftime("flash_%H%M%S")
-#        page.insert_html :bottom, 'flash', "<div id=#{flash_id} class=flash-notice>"+
-#                                   "Section #{moved_section.title} moved to column #{moved_section.column.nth_from_left}"+
-#                                   "</div>"
-#        page.visual_effect(:appear, flash_id, :duration => 1)
-#        page.visual_effect(:blind_down, flash_id, :duration => 1)
-#        page.visual_effect(:fade, flash_id, :delay => 5, :duration => 1)
-#        page.visual_effect(:blind_up, flash_id, :delay => 5, :duration => 1, :afterFinish => "function() { #{flash_id}.remove(); }")
-      end
-    else
-      render :text => ''
     end
   end
   
+  # Insert a new column before :id column
+  def insert_column_before
+    @existing_column = @page.columns.find(params[:id])
+    inserting_at_position = @existing_column.nth_from_left
+    shift_columns_right = false
+    @page.columns.each do |col|
+      shift_columns_right = true if col == @existing_column
+      if shift_columns_right
+        col.nth_from_left += 1
+        col.save!
+      end
+    end
+    @new_column = @page.columns.create(:nth_from_left => inserting_at_position)
+    #render :update do |page|
+    #  ajax_flash_message page, "Inserted new column at position #{inserting_at_position}"
+    #end
+  end
+  
+  def delete_column
+    @column = @page.columns.find(params[:id])
+    @column.destroy
+    # Renumber remaining columns.  No need to redraw entire page as that only uses IDs.
+    nth_from_left = 1
+    @page.columns.each do |col|
+      col.nth_from_left = nth_from_left
+      col.save!
+      nth_from_left += 1
+    end
+  end
+
   private
   
   # Renumber sections from 1

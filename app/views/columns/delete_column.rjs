@@ -1,0 +1,4 @@
+container_id = @column.dom_id + '_and_delete_button'
+column_and_insert_button_id = @column.dom_id + '_and_insert_button'
+page.visual_effect(:blind_up, container_id, :duration => 1,
+                   :afterFinish => "function() { #{column_and_insert_button_id}.remove(); }" )

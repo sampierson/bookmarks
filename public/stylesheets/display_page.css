@@ -9,6 +9,8 @@ body {
   font-size: 70%;
 }
 
+/* Flash Messages */
+
 .flash-notice {
   border: 2px solid green;
   padding: 0.7em;
@@ -33,23 +35,66 @@ body {
   font-weight: bold;
 }
 
-.column {
+/* Page Entities */
+
+.column_and_insert_button {
+}
+
+.column_insert_button a {
+  float: left;
+  font-size: 14pt;
+  color: green;
+  text-decoration: none;
+}
+
+.column_and_delete_button {
   float: left;
   border-style: solid;
   border-width: 1px;
   margin: 1px;
-  padding: 10px, 0, 10px, 0; /* TRBL */
+  /* padding: 10px 10px 10px 10px; /* TRBL */
   width: 250px;
 }
 
+.column_cross_clipping_box {
+  height: 20px;
+  width: 20px;
+  float: right;
+  position: relative;
+  top: 0px;
+  right: 0px;
+  opacity: 20% ;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.column_cross a {
+  position: relative;
+  top: -7px;
+  right: -1px;
+  font-size: 18pt;
+  text-decoration: none;
+  color: red;
+}
+
+.column_and_new_section_button {
+  padding: 10px;
+}
+
+.column {
+  min-height: 100px;
+  cursor: -moz-grab; 
+}
+
 .section {
-  margin: 10px;
-  padding: 5px;
+  margin: 10px 0px; /* TB LR */
   background-color: #dddddd;
 }
 
 .section_title {
   font-weight: bold;
+  font-size: 120%;
 }
 
 ul {
@@ -62,7 +107,4 @@ ul {
 
 .hover { 
   background-color: #888888; 
-} 
-.column { 
-  cursor: -moz-grab; 
 } 
