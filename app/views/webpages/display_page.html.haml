@@ -1,4 +1,5 @@
 #spinner{ :style => "display: none;" }
   = image_tag "spinner.gif"
 = render(:partial => 'columns/column', :collection => @page.columns)
-= make_columns_sortable
+= make_bookmarks_sortable
+= make_sections_sortable

@@ -21,10 +21,10 @@ module ApplicationHelper
     end
   end
   
-  def rjs_make_columns_sortable(webpage)
-    all_columns = webpage.columns.map(&:dom_id)
+  def rjs_make_sections_sortable(webpage)
+    all_columns = webpage.columns.map(&:droptarget_id)
     webpage.columns.each do |column|
-      page.sortable( column.dom_id,
+      page.sortable(column.droptarget_id,
         :url => sort_sections_path(:id => column.id),
         :containment  => all_columns,
         :dropOnEmpty  => true,
@@ -32,9 +32,9 @@ module ApplicationHelper
     end
   end
   
-  def rjs_destroy_column_sortables(webpage, except_this_column = nil)
+  def rjs_destroy_section_sortables(webpage, except_this_column = nil)
     webpage.columns.each do |column|
-      page << "Sortable.destroy(#{column.dom_id});" unless column == except_this_column
+      page << "Sortable.destroy(#{column.droptarget_id});" unless column == except_this_column
     end
   end
   

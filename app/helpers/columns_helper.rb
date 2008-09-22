@@ -12,7 +12,7 @@ module ColumnsHelper
   end
   
   #def make_column_drop_target(column)
-  #  drop_receiving_element(column.dom_id,
+  #  drop_receiving_element(column.droptarget_id,
   #    :accept     => 'section',
   #    :before     => "$('spinner').show();",
   #    :complete   => "$('spinner').hide();",

@@ -2,7 +2,7 @@ class SectionsController < ApplicationController
   
   layout 'admin'
   before_filter :find_column_via_webpage, :only => [ :show, :new, :edit, :create, :update, :destroy ]
-  before_filter :find_section_via_site, :only => [ :set_title ]
+  before_filter :find_section_via_site, :only => [ :set_title, :sort_bookmarks ]
 
   # REST scaffold actions
   
@@ -51,7 +51,37 @@ class SectionsController < ApplicationController
     @section.update_attribute(:title, params[:value])
     render :text => @section.send(:title).to_s
   end
-    
+  
+  # Reorder bookmarks in a section and/or move bookmark into section.
+  # Parameters are:
+  #  'id'                   => x
+  #  'droptargetSection_x'  => [ array of bookmark IDs ]
+  # Note we can get called for a column that is now empty.
+  def sort_bookmarks
+    nth_from_top = 1
+    moved_bookmark = nil
+    unless params[@section.droptarget_id].blank?
+      params[@section.droptarget_id].each do |bookmark_id|
+        # SAM Check bookmark belongs in this page.
+        bookmark = Bookmark.find(bookmark_id)
+        if bookmark.section_id != @section.id
+          moved_bookmark = bookmark
+          bookmark.section_id = @section.id
+        end
+        bookmark.nth_from_top_of_section = nth_from_top
+        bookmark.save!
+        nth_from_top += 1
+      end
+    end
+    if moved_bookmark
+      render :update do |page|
+        page.ajax_flash_message "Bookmark #{moved_bookmark.legend} moved to section #{moved_bookmark.section.title}"
+      end
+    else
+      render :text => ""
+    end
+  end
+  
   private
   
   def find_column_via_webpage

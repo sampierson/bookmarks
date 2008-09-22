@@ -4,10 +4,13 @@ class Bookmark < ActiveRecord::Base
   validates_presence_of :legend
   validate :section_must_exist
   
-  
   # Generates a DOM ID we can use to manipulate this entity when it is in the HTML page.
   def dom_id
     "bookmark_#{id}"
+  end
+  
+  def draggable_id
+    "draggableBookmark_#{id}"
   end
   
   private

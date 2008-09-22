@@ -47,36 +47,17 @@ class ColumnsController < ApplicationController
   
   # Ajax Actions
 
-  #def drop_section
-  #  find_page_via_site
-  #  new_column = @page.columns.find(params[:column_id])
-  #  section = Section.find(:first,
-  #    :select => 's.*',
-  #    :from => 'sections AS s, columns AS c',
-  #    :conditions => [ 's.id = ? AND s.column_id = c.id AND c.webpage_id = ?', params[:id], new_column.webpage.id ] )
-  #  old_column = section.column
-  #  # Associate section with our column.  Give it sequence 999 to put it at the bottom.
-  #  section.nth_section_from_top = 999
-  #  new_column.sections << section # Automatically saved
-  #  renumber_sections_in_column(old_column)
-  #  renumber_sections_in_column(new_column)
-  #  render :update do |page|
-  #    page.replace_html old_column.dom_id, :partial => 'column', :object => old_column
-  #    page.replace_html new_column.dom_id, :partial => 'column', :object => new_column
-  #  end
-  #end
-
   # Reorder sections in a column and/or move section into column.
   # Parameters are:
-  #  'column_id' => x
-  #  'column_x'  => [ array of section IDs ]
+  #  'id'                  => x
+  #  'droptargetColumn_x'  => [ array of section IDs ]
   # Note we can get called for a column that is now empty.
   def sort_sections
     column = @page.columns.find(params[:id])
     nth_from_top = 1
     moved_section = nil
-    unless params[column.dom_id].blank?
-      params[column.dom_id].each do |section_id|
+    unless params[column.droptarget_id].blank?
+      params[column.droptarget_id].each do |section_id|
         # SAM Check sections belongs in this page.
         section = Section.find(section_id)
         if section.column_id != column.id

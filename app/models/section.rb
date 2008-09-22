@@ -14,6 +14,14 @@ class Section < ActiveRecord::Base
     "section_#{id}"
   end
   
+  def draggable_id
+    "draggableSection_#{id}"
+  end
+  
+  def droptarget_id
+    "droptargetSection_#{id}"
+  end
+  
   private
   
   def column_must_exist

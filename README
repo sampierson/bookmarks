@@ -3,8 +3,9 @@ RAILS_BOOKMARKS
 How to rewrite my homepage in Rails, Web 2.0 Style.
 This is an exercise in exercising Ajax.
 
-Features to include:
+Features:
   Ajax editing page.
+  Nested Sortables.
   restful_authentication
   LiveValidation?
   Page caching.
@@ -15,6 +16,23 @@ TODO
   Align ids.
   Send unimplemented actions somewhere? back to preceeding controller?
   What to do when a page/column etc does not exist.
+
+Functionality:
+  Display Page
+  Jump to Edit Page
+  New Page
+  Column Insert
+  Column Delete                       done
+  Section Insert
+  Section Delete
+  Section Move                        done
+  Section Edit (title)
+  Bookmark Insert
+  Bookmark Delete
+  Bookmark Move                       done
+  Bookmark Edit (legend, url)
+
+
 
 Structure
   page ->
@@ -117,13 +135,3 @@ Routes
                       /:site/column/<c>/section/<s>/bookmark/<b>/update
                       /:site/column/<c>/section/<s>/bookmark/<b>/destroy
 
-Rendering
-  _column partial
-  when inserting or moving a column, rerender it using the partial?
-  
-  
-  
-There is a fundamental tension between the /admin interface and the :site interface.
-We want to, say, set the title of a section:
-  Admin interface: /admin/webpages/x/columns/y/sections/z/set_section_title
-  Regular interface: :site/sections/x/set_title

@@ -10,6 +10,10 @@ class Column < ActiveRecord::Base
     "column_#{id}"
   end
   
+  def droptarget_id
+    "droptargetColumn_#{id}"
+  end
+  
   private
   
   def webpage_must_exist
