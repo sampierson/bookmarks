@@ -2,11 +2,11 @@ existing_container = @existing_column.dom_id + "_and_insert_button"
 page.insert_html :before, existing_container, :partial => 'column', :object => @new_column
 # Now to make the new column a sortable/dragdrop target, 
 # we need to destroy all of the exising sortables and recreate new ones that include
-# out new column in their 'containment' list.
-page.rjs_destroy_section_sortables(@page, @new_column)
-#page.rjs_make_sections_sortable(@page)
-all_columns = @page.columns.map(&:droptarget_id)
-@page.columns.each do |column|
+# our new column in their 'containment' list.
+page.rjs_destroy_section_sortables(@webpage, @new_column)
+#page.rjs_make_sections_sortable(@webpage)
+all_columns = @webpage.columns.map(&:droptarget_id)
+@webpage.columns.each do |column|
   page.sortable( column.droptarget_id,
     :url => sort_sections_path(:id => column.id),
     :containment  => all_columns,

@@ -4,7 +4,7 @@ class SectionsController < ApplicationController
   before_filter :find_column_via_webpage, :only => [ :show, :new, :edit, :create, :update, :destroy ]
   before_filter :find_section_via_site, :only => [ :set_title, :sort_bookmarks ]
 
-  # REST scaffold actions
+  # Administrative interface REST CRUD scaffold actions
   
   def show
     @section = @column.sections.find(params[:id])
@@ -47,7 +47,7 @@ class SectionsController < ApplicationController
     redirect_to webpage_column_path(@webpage, @column)
   end
   
-  # Ajax actions
+  # Users' interface Ajax actions
   
   # in_place_edit_for :section, :title
   def set_title
@@ -65,8 +65,8 @@ class SectionsController < ApplicationController
     moved_bookmark = nil
     unless params[@section.droptarget_id].blank?
       params[@section.droptarget_id].each do |bookmark_id|
-        # SAM Check bookmark belongs in this page.
         bookmark = Bookmark.find(bookmark_id)
+        raise "Sorry this bookmark belongs to a different web page" if bookmark.section.column.webpage != @page
         if bookmark.section_id != @section.id
           moved_bookmark = bookmark
           bookmark.section_id = @section.id

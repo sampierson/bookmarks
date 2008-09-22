@@ -4,7 +4,7 @@ class BookmarksController < ApplicationController
   
   before_filter :find_section
 
-  # REST CRUD methods
+  # Administrative interface REST CRUD scaffold actions
   
   def new
     @bookmark = @section.bookmarks.build
