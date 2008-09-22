@@ -9,14 +9,17 @@ class ColumnsController < ApplicationController
   
   def show
     @column = @webpage.columns.find(params[:id], :include => :sections)
+    render :template => 'columns/scaffold/show'
   end
 
   def new
     @column = @webpage.columns.build
+    render :template => 'columns/scaffold/new'
   end
 
   def edit
     @column = @webpage.columns.find(params[:id])
+    render :template => 'columns/scaffold/edit'
   end
 
   def create
@@ -25,7 +28,7 @@ class ColumnsController < ApplicationController
       flash[:notice] = 'Column was successfully created.'
       redirect_to(@webpage)
     else
-      render :action => "new"
+      render :template => 'columns/scaffold/new'
     end
   end
 
@@ -35,7 +38,7 @@ class ColumnsController < ApplicationController
       flash[:notice] = 'Column was successfully updated.'
       redirect_to webpage_path(@webpage)
     else
-      render :action => "edit"
+      render :template => 'columns/scaffold/edit'
     end
   end
 

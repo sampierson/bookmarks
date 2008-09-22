@@ -8,14 +8,17 @@ class SectionsController < ApplicationController
   
   def show
     @section = @column.sections.find(params[:id])
+    render :template => 'sections/scaffold/show'
   end
 
   def new
     @section = @column.sections.build
+    render :template => 'sections/scaffold/new'
   end
 
   def edit
     @section = @column.sections.find(params[:id])
+    render :template => 'sections/scaffold/edit'
   end
 
   def create
@@ -24,7 +27,7 @@ class SectionsController < ApplicationController
       flash[:notice] = 'Section was successfully created.'
       redirect_to webpage_column_path(@webpage, @column)
     else
-      render :action => "new"
+      render :template => 'sections/scaffold/new'
     end
   end
 
@@ -34,7 +37,7 @@ class SectionsController < ApplicationController
       flash[:notice] = 'Section was successfully updated.'
       redirect_to webpage_column_path(@webpage, @column)
     else
-      render :action => "edit"
+      render :template => 'sections/scaffold/edit'
     end
   end
 

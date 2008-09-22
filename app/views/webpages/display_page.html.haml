@@ -1,5 +1,13 @@
-#spinner{ :style => "display: none;" }
-  = image_tag "spinner.gif"
-= render(:partial => 'columns/column', :collection => @page.columns)
-= make_bookmarks_sortable
-= make_sections_sortable
+- @page.columns.each do |column|
+  .column
+    - column.sections.each do |section|
+      .section
+        .section_title
+          = section.title
+        - section.bookmarks.each do |bookmark|
+          .bookmark
+            %a{ :href => bookmark.url }
+              = bookmark.legend
+%br/
+=button_to 'Edit Page', edit_page_path
+  

@@ -1,25 +1,32 @@
 class WebpagesController < ApplicationController
   
-  layout 'admin', :except => :display_page
+  layout 'admin', :except => [ :display_page, :edit_page ]
   
   # GET /site/webpages
   def index
     @webpages = Webpage.find(:all)
+    render :template => 'webpages/scaffold/index'
   end
 
   # GET /site/webpages/1
   def show
     @webpage = Webpage.find(params[:id], :include => :columns)
+    render :template => 'webpages/scaffold/show'
+    
   end
 
   # GET /site/webpages/new
   def new
     @webpage = Webpage.new
+    render :template => 'webpages/scaffold/new'
+    
   end
 
   # GET /site/webpages/1/edit
   def edit
     @webpage = Webpage.find(params[:id])
+    render :template => 'webpages/scaffold/edit'
+    
   end
 
   # POST /site/webpages
@@ -29,7 +36,7 @@ class WebpagesController < ApplicationController
       flash[:notice] = 'Webpage was successfully created.'
       redirect_to(@webpage)
     else
-      render :action => "new"
+      render :template => 'webpages/scaffold/new'
     end
   end
 
@@ -40,7 +47,7 @@ class WebpagesController < ApplicationController
       flash[:notice] = 'Webpage was successfully updated.'
       redirect_to webpages_path
     else
-      render :action => "edit"
+      render :template => 'webpages/scaffold/edit'
     end
   end
 
@@ -52,6 +59,13 @@ class WebpagesController < ApplicationController
   end
 
   def display_page
+    @page = Webpage.find_by_url(params[:site])
+    # SAM handle failure here - redirect to new
+    raise("cannot find a Webpage for site #{params[:site]}") if @page.nil?
+    render :layout => 'display_page'
+  end
+  
+  def edit_page
     @page = Webpage.find_by_url(params[:site])
     # SAM handle failure here - redirect to new
     raise("cannot find a Webpage for site #{params[:site]}") if @page.nil?
