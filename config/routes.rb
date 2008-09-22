@@ -11,8 +11,8 @@ ActionController::Routing::Routes.draw do |map|
   
   # Users' interface.
   map.with_options :requirements => { :site => /[^\/]*/ } do |route|
-    route.display_page ':site/',     :conditions => { :method => :get  }, :controller => 'webpages', :action => 'display_page'
-    route.edit_page    ':site/edit', :conditions => { :method => :post }, :controller => 'webpages', :action => 'edit_page'
+    route.display_page ':site/',     :conditions => { :method => :get }, :controller => 'webpages', :action => 'display_page'
+    route.edit_page    ':site/edit', :conditions => { :method => :get }, :controller => 'webpages', :action => 'edit_page'
     # The Ajax routes
     route.insert_column_before ':site/columns/:id/before',      :conditions => { :method => :post   }, :controller => 'columns',  :action => 'insert_column_before'
     route.delete_column        ':site/columns/:id',             :conditions => { :method => :delete }, :controller => 'columns',  :action => 'delete_column'
