@@ -1,9 +1,13 @@
 module ColumnsHelper
   
   def column_insert_button(column)
-     link_to_remote('+', :url => insert_column_before_path(:id => column.id), :method => :post)
+    link_to_remote('+', :url => insert_column_before_path(:id => column.id), :method => :post)
   end
    
+  def add_column_on_right_button
+    link_to_remote('+', :url => add_column_on_right_path, :method => :post)
+  end
+ 
   def column_delete_button(column)
     link_to_remote('&otimes;',
       :url => delete_column_path(:id => column.id),

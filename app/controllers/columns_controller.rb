@@ -3,7 +3,7 @@ class ColumnsController < ApplicationController
   layout 'admin'
 
   before_filter :find_webpage,       :only => [ :show, :new, :edit, :create, :update, :destroy ]
-  before_filter :find_page_via_site, :only => [ :sort_sections, :insert_column_before, :delete_column ]
+  before_filter :find_page_via_site, :only => [ :sort_sections, :insert_column_before, :add_column_on_right, :delete_column ]
 
   # Administrative interface REST CRUD scaffold actions
   
@@ -96,6 +96,13 @@ class ColumnsController < ApplicationController
       end
     end
     @new_column = @webpage.columns.create(:nth_from_left => inserting_at_position)
+  end
+  
+  # Insert a new column on the far right hand side
+  def add_column_on_right
+    current_rightmost_column = Column.maximum(:nth_from_left, :conditions => "webpage_id = #{@webpage.id}")
+    new_column_position = (current_rightmost_column || 0) + 1
+    @new_column = @webpage.columns.create(:nth_from_left => new_column_position)
   end
   
   def delete_column
