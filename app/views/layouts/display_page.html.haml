@@ -9,12 +9,8 @@
     = stylesheet_link_tag 'display_page'
     = javascript_include_tag :defaults
   %body
-    #masthead
-    #mainstage
-      #flash
-        - [ :error, :warning, :notice ].each do |level|
-          - unless flash[level].blank?
-            %div{ :class => "flash-#{level}" }
-              = flash[level]
-      #canvas
-        = yield
+    #lane
+      #masthead
+      #mainstage
+        #canvas
+          = yield

@@ -1,3 +1,8 @@
+#flash
+  - [ :error, :warning, :notice ].each do |level|
+    - unless flash[level].blank?
+      %div{ :class => "flash flash-#{level}" }
+        = flash[level]
 - @page.columns.each do |column|
   .column
     - column.sections.each do |section|

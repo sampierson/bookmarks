@@ -6,14 +6,14 @@ module ApplicationHelper
   def ajax_flash_message(message)
     flash_mode = :stacking
     if flash_mode == :simple
-      page.replace_html 'flash', "<div class=flash-notice>#{message}</div>"
+      page.replace_html 'flash_container', "<div class=\"flash flash-notice\">#{message}</div>"
       page.visual_effect(:appear, 'flash', :duration => 1)
       #page.visual_effect(:blind_down, 'flash', :duration => 1)
       page.visual_effect(:fade, 'flash', :delay => 5, :duration => 1)
       page.visual_effect(:blind_up, 'flash', :delay => 5, :duration => 1)
     else
       flash_id = Time.now.strftime("flash_%H%M%S")
-      page.insert_html :bottom, 'flash', "<div id=#{flash_id} class=flash-notice>#{message}</div>"
+      page.insert_html :bottom, 'flash_container', "<div id=#{flash_id} class=\"flash flash-notice\">#{message}</div>"
       page.visual_effect(:appear, flash_id, :duration => 1)
       page.visual_effect(:blind_down, flash_id, :duration => 1)
       page.visual_effect(:fade, flash_id, :delay => 5, :duration => 1)

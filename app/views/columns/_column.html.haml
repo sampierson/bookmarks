@@ -1,12 +1,12 @@
 .column_and_insert_button{ :id => column.dom_id + "_and_insert_button" }
   .column_insert_button= column_insert_button(column)
   .column_and_delete_button{ :id => column.dom_id + "_and_delete_button" }
-    .column_ocross_clipping_box
-      %span.column_ocross
+    .column_otimes_clipping_box
+      %span.column_otimes
         = column_delete_button(column)
     %br/
     .column_and_new_section_button
-      %ul.column{ :id => column.droptarget_id }
+      %ul.column_edit{ :id => column.droptarget_id }
         = render(:partial => 'sections/section', :collection => column.sections)
       .new_section_button
         New Section
