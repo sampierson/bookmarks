@@ -6,7 +6,7 @@
         = column_delete_button(column)
     %br/
     .column_and_new_section_button
-      %ul.column_edit{ :id => column.droptarget_id }
+      %ul.column_sortable{ :id => column.droptarget_id }
         = render(:partial => 'sections/section', :collection => column.sections)
       .new_section_button
         New Section

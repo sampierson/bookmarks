@@ -1,9 +1,9 @@
-%li.section_edit{ :id => section.draggable_id }
+%li.section_title_and_sortable{ :id => section.draggable_id }
   - section_title_id = section.dom_id + "_title"
   .section_title
     = section_title_in_place_editor(section)
   - if section.bookmarks.count > 0
-    %ul{ :id => section.droptarget_id }
+    %ul.section_sortable{ :id => section.droptarget_id }
       - section.bookmarks.each do |bookmark|
         %li.bookmark_edit{ :id => bookmark.draggable_id }
           = bookmark.legend

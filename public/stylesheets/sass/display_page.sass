@@ -3,8 +3,9 @@
 !darker_a = #B3964F
 !lighter_a = #FFE5A4
 !darker_b = #6177B3
-!medium_b = #A4BCFF
+!medium_b = #849CDF
 !lighter_b = #CEDFFF
+//!lighter_b = #cccccc
 
 html
   height: 100%
@@ -15,9 +16,9 @@ body
   height: 100%
 
 #lane
-  width: 780px
+  width: 760px
   margin: 0 auto 0 auto 
-  padding: 0
+  padding: 0px 20px
   font-family: verdana, helvetica, arial, sans-serif
   background-color = !lighter_a
   font-size: 70%
@@ -33,10 +34,6 @@ body
 /* Flash Messages
 
 #flash_container
-  border:
-    style: solid
-    width: 1px
-    color: black
   margin: 0px 50px 10px 50px
   
 .flash
@@ -63,10 +60,7 @@ ul
   margin: 0
   padding: 0
 
-.instructions
-  border: solid 1px black
-  margin: 0px 50px 10px 50px
-  padding: 0px 10px
+/* display_page.html
 
 .column
   float: left
@@ -82,26 +76,43 @@ ul
   margin: 2px
   background-color = !lighter_b
 
+/* edit_page.html
+
+.instructions
+  border: solid 1px black
+  margin: 0px 50px 10px 50px
+  padding: 0px 10px 5px 10px
+  
+.instructions_columns
+  padding: 0px 3px
+  border: solid 1px black
+  background-color = !darker_b
+  
 .instructions_column_insert_button
   color: green
   font-weight: bold
-
 
 .instructions_otimes
   font-size: 14pt
   color: red
 
+.instructions_sections
+  padding: 0px 3px
+  border: solid 1px black
+  background-color = !medium_b
 
-/* edit_page.html
+.instructions_bookmarks
+  padding: 0px 3px
+  border: solid 1px black
+  background-color = !lighter_b
+
+#columns
   
- 
 .column_and_insert_button
-
 
 .column_insert_button
   font-size: 14pt
   color: green
-
 
 .column_insert_button a
   float: left
@@ -109,17 +120,12 @@ ul
   color: green
   text-decoration: none
 
-
 .column_and_delete_button
   float: left
   border-style: solid
   border-width: 1px
   margin: 1px
-  // padding: 10px 10px 10px 10px // TRBL
-  // width: 250px
-
-
-
+  background-color = !darker_b
 
 .column_otimes_clipping_box
   height: 20px
@@ -131,7 +137,7 @@ ul
   margin: 0
   padding: 0
   overflow: hidden
-
+  z-index: 100
 
 .column_otimes a
   position: relative
@@ -141,42 +147,38 @@ ul
   text-decoration: none
   color: red
 
-
 .column_and_new_section_button
-  padding: 0px 10px
+  padding: 0px 0px
 
-
-.column_edit
+.column_sortable
   min-height: 100px
   min-width: 150px
-  // padding: 0px 10px
+  padding: 5px
   cursor: -moz-grab
 
-
-.new_section_button
-  margin: 10px 0px
-  text-decoration: line-through
-
-
-.section_edit
-  margin: 10px 0px /* TB LR */
-  padding: 5px
-  min-height: 10px
-  background-color: #dddddd
-
+.section_title_and_sortable
+  background-color = !medium_b
 
 .section_title
   font-weight: bold
   font-size: 120%
 
+.section_sortable
+  margin: 0px 0px 5px 0px
+  padding: 5px 5px 3px 5px
+  min-height: 10px
+  background-color = !medium_b
 
 .bookmark_edit
+  background-color = !lighter_b
+  margin: 0px 0px 2px 0px
+
+.new_section_button
+  margin: 0px 0px 5px 5px
+  text-decoration: line-through
   
-
-
 /* Drag and drop
 
 .hover 
   background-color: #888888 
-
 

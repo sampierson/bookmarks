@@ -68,8 +68,8 @@ class SectionsController < ApplicationController
         bookmark = Bookmark.find(bookmark_id)
         raise "Sorry this bookmark belongs to a different web page" if bookmark.section.column.webpage != @page
         if bookmark.section_id != @section.id
-          moved_bookmark = bookmark
           bookmark.section_id = @section.id
+          moved_bookmark = bookmark
         end
         bookmark.nth_from_top_of_section = nth_from_top
         bookmark.save!
@@ -78,7 +78,7 @@ class SectionsController < ApplicationController
     end
     if moved_bookmark
       render :update do |page|
-        page.ajax_flash_message "Bookmark #{moved_bookmark.legend} moved to section #{moved_bookmark.section.title}"
+        page.ajax_flash_message "Bookmark #{moved_bookmark.legend} moved to section #{@section.title}"
       end
     else
       render :text => ""
