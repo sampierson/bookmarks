@@ -3,25 +3,7 @@
 %center
   %br/
   %h2 Bookmarks Editor
-.instructions
-  The
-  %span.instructions_columns outer boxes
-  are Columns.
-  Use
-  %span.instructions_column_insert_button +
-  and
-  %span.instructions_otimes &otimes;
-  to add and remove columns.
-  %br/
-  Columns contain
-  %span.instructions_sections sections
-  \.
-  To move a section between columns, grab it by the title and drag it.
-  %br/
-  Sections contain
-  %span.instructions_bookmarks bookmarks
-  (URLs).
-  Bookmarks can be dragged between sections.
+= render :partial => 'edit_instructions'
 #flash_container
 #columns
   = render(:partial => 'columns/column', :collection => @page.columns)
