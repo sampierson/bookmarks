@@ -9,7 +9,9 @@ class WebpagesControllerTest < ActionController::TestCase
   def test_routing
     assert_restful_routing("/admin/webpages", @w, { :controller => 'webpages' })
   end
-   
+  
+  # Test REST CRUD actions
+  
   def test_should_get_index
     get :index
     assert_response :success
@@ -78,6 +80,27 @@ class WebpagesControllerTest < ActionController::TestCase
       delete :destroy, :id => @w.id
     end
     assert_redirected_to webpages_path
+  end
+  
+  # Test display and edit of webpage
+  
+  def test_display_page
+    assert_routing({ :path => "/webpage_1", :method => :get },
+                   { :controller => 'webpages', :action => 'display_page', :site => 'webpage_1' } )
+    get :display_page, :site => 'webpage_1'
+    assert assigns(:page)
+    w = webpages(:page_1)
+    assert_equal 'webpage_1', assigns(:page).url
+    assert_select 'body #lane' do
+      w.columns.each do |column|
+        column.sections.each do |section|
+          assert_select ".column .section .section_title", section.title
+          section.bookmarks.each do |bookmark|
+            assert_select ".column .section .bookmark a[href=#{bookmark.url}]", bookmark.legend
+          end
+        end
+      end
+    end
   end
   
 end
