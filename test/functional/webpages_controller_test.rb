@@ -10,7 +10,7 @@ class WebpagesControllerTest < ActionController::TestCase
     assert_restful_routing("/admin/webpages", @w, { :controller => 'webpages' })
   end
   
-  # Test REST CRUD actions
+  # Test REST CRUD scaffold actions
   
   def test_should_get_index
     get :index
@@ -100,6 +100,29 @@ class WebpagesControllerTest < ActionController::TestCase
           end
         end
       end
+    end
+  end
+  
+  # Check for the manipulatable elements in this page.
+  def test_edit_page
+    assert_routing({ :path => "/webpage_1/edit", :method => :get },
+                   { :controller => 'webpages', :action => 'edit_page', :site => 'webpage_1' } )
+    get :edit_page, :site => 'webpage_1'
+    assert assigns(:page)
+    w = webpages(:page_1)
+    assert_equal 'webpage_1', assigns(:page).url
+    assert_select 'body #lane #columns' do
+      w.columns.each do |column|
+        assert_select("##{column.droptarget_id}.column_sortable")
+        column.sections.each do |section|
+          assert_select("li##{section.draggable_id}.section_title_and_sortable")
+          assert_select("ul##{section.droptarget_id}.section_sortable")
+          section.bookmarks.each do |bookmark|
+            assert_select("li##{bookmark.draggable_id}.bookmark_edit")
+          end
+        end
+      end
+      # Can we check for the Sortable.create calls?
     end
   end
   
