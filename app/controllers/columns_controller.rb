@@ -75,6 +75,7 @@ class ColumnsController < ApplicationController
     # Scriptaculous has already reordered the sections in the page for us.
     # However if a section wasn't previously in this column, send a flash message.
     if moved_section
+      moved_section.reload
       render :update do |page|
         page.ajax_flash_message "Section #{moved_section.title} moved to column #{moved_section.column.nth_from_left}"
       end
@@ -107,6 +108,7 @@ class ColumnsController < ApplicationController
   
   def delete_column
     @column = @webpage.columns.find(params[:id])
+    @old_sections = @column.sections
     @column.destroy
     renumber_columns_in_webpage(@webpage)
   end

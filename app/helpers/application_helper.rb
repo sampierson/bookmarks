@@ -1,7 +1,27 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
-  # Routines that must be called from the context of a JavaScript Generator
+  # From http://www.eribium.org/blog/?p=165
+  def button_to_remote(name, options = {}, html_options = {})
+    html_options = html_options.stringify_keys
+    convert_boolean_attributes!(html_options, %w( disabled ))
+    method_tag = ''
+    if (method = html_options.delete('method')) && %w{put delete}.include?(method.to_s)
+      method_tag = tag('input', :type => 'hidden', :name => '_method', :value => method.to_s)
+      options.merge!(:method => method.to_s)
+    end
+    if confirm = html_options.delete("confirm")
+      html_options["onclick"] = "return #{confirm_javascript_function(confirm)};"
+    end
+    before_html = html_options.delete('before') || ''
+    after_html = html_options.delete('after') || ''
+    url = options.is_a?(String) ? options : self.url_for(options)
+    name ||= url
+    options.merge!(:html => {:class => 'button-to'})
+    form_remote_tag(options) + method_tag + before_html + tag("button", html_options, true) + name + '</button>' + after_html + '</form>'
+  end
+   
+  # Routines that must be called from the context of a JavaScript Generator (variable 'page' is set).
   
   def ajax_flash_message(message)
     flash_mode = :stacking
@@ -21,21 +41,51 @@ module ApplicationHelper
     end
   end
   
-  def rjs_make_sections_sortable(webpage)
-    all_columns = webpage.columns.map(&:droptarget_id)
-    webpage.columns.each do |column|
-      page.sortable(column.droptarget_id,
-        :url => sort_sections_path(:id => column.id),
-        :containment  => all_columns,
-        :dropOnEmpty  => true,
-        :hoverclass   => "'hover'" )
+  # Note that for nested Scritaculous Sortables to work, the inner sortable must be created first.
+  # i.e. create section sortables before column sortables.
+  
+  def rjs_create_column_sortables(column_data)
+    all_columns = column_data.map { |c| c[:droptarget_id] }
+    column_data.each do |cdata|
+      page.sortable(cdata[:droptarget_id],
+                    :url => cdata[:url],
+                    :containment => all_columns,
+                    :dropOnEmpty  => true,
+                    :hoverclass   => "'hover'" )
     end
   end
   
-  def rjs_destroy_section_sortables(webpage, except_this_column = nil)
+  def rjs_create_section_sortables(section_data)
+    all_sections = section_data.map { |s| s[:droptarget_id] }
+    column_data.each do |cdata|
+      page.sortable(cdata[:droptarget_id],
+                    :url => cdata[:url],
+                    :containment => all_sections,
+                    :dropOnEmpty  => true,
+                    :hoverclass   => "'hover'" )
+    end
+  end
+  
+  def rjs_destroy_column_sortables_for_webpage(webpage, options = {})
     webpage.columns.each do |column|
-      page << "Sortable.destroy(#{column.droptarget_id});" unless column == except_this_column
+      next if column == options[:except_column]
+      page << "Sortable.destroy(#{column.droptarget_id});"
+    end
+  end
+  
+  def rjs_destroy_section_sortables_for_webpage(webpage, options = {})
+    webpage.columns.each do |column|
+      next if column == options[:except_column]
+      rjs_destroy_section_sortables_for_column(column, options)
+    end
+  end
+  
+  def rjs_destroy_section_sortables_for_column(column, options = {})
+    column.sections.each do |section|
+      next if section == options[:except_section]
+      page << "Sortable.destroy(#{section.droptarget_id});"
     end
   end
   
 end
+

@@ -1,12 +1,12 @@
 .column_and_insert_button{ :id => column.dom_id + "_and_insert_button" }
   .column_add_button= column_insert_button(column)
   .column_and_delete_button{ :id => column.dom_id + "_and_delete_button" }
-    .column_otimes_clipping_box
+    .column_delete_button
       %span.column_otimes
         = column_delete_button(column)
     %br/
     .column_and_new_section_button
       %ul.column_sortable{ :id => column.droptarget_id }
-        = render(:partial => 'sections/section', :collection => column.sections)
+        = render(:partial => 'sections/section', :collection => column.sections, :locals => { :style => '' } )
       .new_section_button
-        New Section
+        = new_section_button(column)

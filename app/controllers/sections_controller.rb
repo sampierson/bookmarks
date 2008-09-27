@@ -85,6 +85,13 @@ class SectionsController < ApplicationController
     end
   end
   
+  def new_section
+    @webpage = Webpage.find_by_url(params[:site])
+    @column = @webpage.columns.find(params[:column_id])
+    @new_section = @column.sections.create(:title => "New Section",
+                                           :nth_section_from_top => @column.sections.size + 1)
+  end
+  
   private
   
   def find_column_via_webpage
@@ -94,10 +101,7 @@ class SectionsController < ApplicationController
   
   def find_section_via_site
     @page = Webpage.find_by_url(params[:site])
-    @section = Section.find(:first,
-      :select => 's.*',
-      :from => 'sections AS s, columns AS c',
-      :conditions => [ 's.id = ? AND s.column_id = c.id AND c.webpage_id = ?', params[:id], @page.id ] )
+    @section = @page.sections.find(:first, :conditions => [ 'sections.id = ?', params[:id] ])
   end
     
 end

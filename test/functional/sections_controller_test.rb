@@ -95,8 +95,10 @@ class SectionsControllerTest < ActionController::TestCase
   
   # Simulate drop of page_1_col_2_sec_1_mark_1 between page_1_col_1_sec_1_mark_1 and page_1_col_1_sec_1_mark_2
   def test_sort_bookmarks
-    dragged = bookmarks(:page_1_col_2_sec_1_mark_1)
     droptarget = sections(:page_1_col_1_sec_1)
+    assert_routing({ :path => "/webpage_1/sections/#{droptarget.id}/sort", :method => :post },
+                   { :controller => 'sections', :action => 'sort_bookmarks', :site => 'webpage_1', :id => droptarget.id.to_s } )
+    dragged = bookmarks(:page_1_col_2_sec_1_mark_1)
     new_bookmark_order = [ bookmarks(:page_1_col_2_sec_1_mark_1).id, dragged.id, bookmarks(:page_1_col_1_sec_1_mark_2) ]
     assert_routing({ :path => "/webpage_1/sections/#{droptarget.id}/sort", :method => :post },
                    { :controller => 'sections', :action => 'sort_bookmarks', :site => 'webpage_1', :id => droptarget.id.to_s } )
@@ -107,5 +109,22 @@ class SectionsControllerTest < ActionController::TestCase
     assert_equal droptarget, dragged.section
     assert_equal 2, dragged.nth_from_top_of_section
   end
+  
+  def test_new_section
+    column = columns(:page_1_col_1)
+    section_count_before = column.sections.size
+    assert_routing({ :path => "/webpage_1/sections/#{column.id}/new", :method => :post },
+                   { :controller => 'sections', :action => 'new_section', :site => 'webpage_1', :column_id => column.id.to_s } )
+#    assert_difference(column.sections.size, 1) do
+      xhr :post, :new_section, :site=> webpages(:page_1).url, :column_id => column.id.to_s
+      assert_response :success
+      assert assigns(:new_section)
+      new_section = assigns(:new_section)
+      assert_equal column, new_section.column
+      assert_equal section_count_before+1, new_section.nth_section_from_top
+      assert_equal "New Section", new_section.title
+      assert_select_rjs :insert_html, :bottom, column.droptarget_id, :partial => 'section', :object => @new_section
+    end
+#  end
   
 end

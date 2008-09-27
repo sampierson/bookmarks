@@ -1,15 +1,9 @@
 existing_container = @existing_column.dom_id + "_and_insert_button"
 page.insert_html :before, existing_container, :partial => 'column', :object => @new_column
-# Now to make the new column a sortable/dragdrop target, 
-# we need to destroy all of the exising sortables and recreate new ones that include
-# our new column in their 'containment' list.
-page.rjs_destroy_section_sortables(@webpage, @new_column)
-#page.rjs_make_sections_sortable(@webpage)
-all_columns = @webpage.columns.map(&:droptarget_id)
-@webpage.columns.each do |column|
-  page.sortable( column.droptarget_id,
-    :url => sort_sections_path(:id => column.id),
-    :containment  => all_columns,
-    :dropOnEmpty  => true,
-    :hoverclass   => "'hover'" )
-end
+# Now to make the new column a sortable/dragdrop target, we need to destroy all of the
+# exising sortables and recreate new ones that include new_column in their 'containment' list.
+page.rjs_destroy_column_sortables_for_webpage(@webpage, :except_column => @new_column)
+# For some reason calling sort_section_path from a helper, instead of right here, hangs rails.
+# For that reason we create all the data here and pass it to the helper.
+@column_data = @webpage.columns.map { |c| { :droptarget_id => c.droptarget_id, :url =>sort_sections_path(:id => c.id) } }
+page.rjs_create_column_sortables(@column_data)

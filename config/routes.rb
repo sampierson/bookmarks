@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
     route.add_column_on_right  ':site/columns/new',        :conditions => { :method => :post   }, :controller => 'columns',  :action => 'add_column_on_right'
     route.delete_column        ':site/columns/:id',        :conditions => { :method => :delete }, :controller => 'columns',  :action => 'delete_column'
     route.sort_sections        ':site/columns/:id/sort',   :conditions => { :method => :post   }, :controller => 'columns',  :action => 'sort_sections'
+    # Note: for a new section, :id is the ID of the column to put it in, not the ID of the section, obviously.
+    route.new_section          ':site/sections/:column_id/new',    :conditions => { :method => :post  }, :controller => 'sections', :action => 'new_section'
     route.set_section_title    ':site/sections/:id/title', :conditions => { :method => :post   }, :controller => 'sections', :action => 'set_title'
     route.sort_bookmarks       ':site/sections/:id/sort',  :conditions => { :method => :post   }, :controller => 'sections', :action => 'sort_bookmarks'
   end

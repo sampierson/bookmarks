@@ -1,0 +1,17 @@
+existing_container = 'add_column_on_right_button'
+page.insert_html :bottom, @column.droptarget_id, :partial => 'section', :object => @new_section, :locals => { :style => 'display: none;' }
+page.visual_effect(:blind_down, @new_section.draggable_id, :duration => 0.5)
+# Now to make the new section a sortable/dragdrop target, we need to destroy all of the
+# exising sortables and recreate new ones that include new_column in their 'containment' list.
+# Note that for nested Scritaculous Sortables to work, the inner sortable must be created first.
+# i.e. create section sortables before column sortables.  For this reason we destroy ALL sortables
+# then work from the inside back out.
+page.rjs_destroy_section_sortables_for_webpage(@webpage, :except_section => @new_section)
+page.rjs_destroy_column_sortables_for_webpage(@webpage)
+# For some reason calling sort_section_path from a helper, instead of right here, hangs rails.
+# For that reason we create all the data here and pass it to the helper.
+@section_data = @webpage.sections.map { |s| { :droptarget_id => s.droptarget_id, :url =>sort_bookmarks_path(:id => s.id) } }
+page.rjs_create_column_sortables(@section_data)
+
+@column_data = @webpage.columns.map { |c| { :droptarget_id => c.droptarget_id, :url =>sort_sections_path(:id => c.id) } }
+page.rjs_create_column_sortables(@column_data)
