@@ -77,6 +77,17 @@ class ColumnsControllerTest < ActionController::TestCase
 
   # Test Ajax actions
   
+  def test_cannot_move_section_between_pages
+    droptarget = columns(:page_2_col_1)
+    dragged_section = sections(:page_1_col_1_sec_1)
+    new_section_order = [ sections(:page_2_col_1_sec_1).id, dragged_section.id ]
+    assert_raises(ActiveRecord::RecordNotFound) do
+      xhr :post, :sort_sections, :site => webpages(:page_1).url,
+        :id => droptarget.id, droptarget.droptarget_id => new_section_order
+    end
+    assert_response 0
+  end
+  
   # Simulate a drag/drop of page_1_column_2_section_1 onto page_1_column_1, inbetween sections 1 and 2 of that column.
   def test_sort_sections
     droptarget = columns(:page_1_col_1)
@@ -88,7 +99,9 @@ class ColumnsControllerTest < ActionController::TestCase
         :id => droptarget.id, droptarget.droptarget_id => new_section_order
     assert_response :success
     # Check the database got rearranged
-    assert_equal Section.find(dragged_section.id).column, droptarget
+    dragged_section.reload
+    assert_equal droptarget, dragged_section.column
+    assert_equal 2, dragged_section.nth_section_from_top
     # Check for rjs commands
     assert_select_rjs :insert_html, :bottom, 'flash_container'
   end

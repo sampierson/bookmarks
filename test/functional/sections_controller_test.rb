@@ -1,14 +1,20 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class SectionsControllerTest < ActionController::TestCase
-
-  # Index method is not implemented for sections.
-  # SAM how to check this?
   
   def setup
     @w = webpages(:page_1)
     @c = @w.columns.first
     @s = @c.sections.first
+  end
+  
+  # Test REST CRUD scaffold actions
+  
+  # Index method is not implemented for sections.  Check this.
+  def test_no_index_method
+    assert_raise(ActionController::RoutingError) do
+      get :index
+    end
   end
   
   def test_routing
@@ -73,4 +79,33 @@ class SectionsControllerTest < ActionController::TestCase
     assert_redirected_to webpage_column_path(@w, @c)
   end
 
+  # Test Ajax actions
+  
+  def test_set_title
+    section = sections(:page_1_col_1_sec_1)
+    assert_routing({ :path => "/webpage_1/sections/#{section.id}/title", :method => :post },
+                   { :controller => 'sections', :action => 'set_title', :site => 'webpage_1', :id => section.id.to_s } )
+    newtitle = "ldjkfgeirutkdjflg"
+    xhr :post, :set_title, :site => webpages(:page_1).url, :id => section.id, :value => newtitle
+    assert_response :success
+    section.reload
+    assert_equal newtitle, section.title
+    assert_match newtitle, @response.body
+  end
+  
+  # Simulate drop of page_1_col_2_sec_1_mark_1 between page_1_col_1_sec_1_mark_1 and page_1_col_1_sec_1_mark_2
+  def test_sort_bookmarks
+    dragged = bookmarks(:page_1_col_2_sec_1_mark_1)
+    droptarget = sections(:page_1_col_1_sec_1)
+    new_bookmark_order = [ bookmarks(:page_1_col_2_sec_1_mark_1).id, dragged.id, bookmarks(:page_1_col_1_sec_1_mark_2) ]
+    assert_routing({ :path => "/webpage_1/sections/#{droptarget.id}/sort", :method => :post },
+                   { :controller => 'sections', :action => 'sort_bookmarks', :site => 'webpage_1', :id => droptarget.id.to_s } )
+    xhr :post, :sort_bookmarks, :site => webpages(:page_1).url, :id => droptarget.id.to_s,
+        droptarget.droptarget_id => new_bookmark_order
+    assert_response :success
+    dragged.reload
+    assert_equal droptarget, dragged.section
+    assert_equal 2, dragged.nth_from_top_of_section
+  end
+  
 end
