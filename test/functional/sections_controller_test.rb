@@ -115,16 +115,15 @@ class SectionsControllerTest < ActionController::TestCase
     section_count_before = column.sections.size
     assert_routing({ :path => "/webpage_1/sections/#{column.id}/new", :method => :post },
                    { :controller => 'sections', :action => 'new_section', :site => 'webpage_1', :column_id => column.id.to_s } )
-#    assert_difference(column.sections.size, 1) do
-      xhr :post, :new_section, :site=> webpages(:page_1).url, :column_id => column.id.to_s
-      assert_response :success
-      assert assigns(:new_section)
-      new_section = assigns(:new_section)
-      assert_equal column, new_section.column
-      assert_equal section_count_before+1, new_section.nth_section_from_top
-      assert_equal "New Section", new_section.title
-      assert_select_rjs :insert_html, :bottom, column.droptarget_id, :partial => 'section', :object => @new_section
-    end
-#  end
+    xhr :post, :new_section, :site=> webpages(:page_1).url, :column_id => column.id.to_s
+    assert_response :success
+    assert assigns(:new_section)
+    new_section = assigns(:new_section)
+    assert_equal column, new_section.column
+    assert_equal section_count_before+1, new_section.nth_section_from_top
+    assert_equal section_count_before+1, column.sections.size
+    assert_equal "New Section", new_section.title
+    assert_select_rjs :insert_html, :bottom, column.droptarget_id, :partial => 'section', :object => @new_section
+  end
   
 end
