@@ -75,11 +75,6 @@ class ColumnsControllerTest < ActionController::TestCase
     assert_redirected_to webpage_path(@w)
   end
 
-#  route.insert_column_before ':site/columns/:id/before', :conditions => { :method => :post   }, :controller => 'columns',  :action => 'insert_column_before'
-#  route.add_column_on_right  ':site/columns/new',        :conditions => { :method => :post   }, :controller => 'columns',  :action => 'add_column_on_right'
-#  route.delete_column        ':site/columns/:id',        :conditions => { :method => :delete }, :controller => 'columns',  :action => 'delete_column'
-#  route.sort_sections        ':site/columns/:id/sort',   :conditions => { :method => :post   }, :controller => 'columns',  :action => 'sort_sections'
-
   # Test Ajax actions
   
   # Simulate a drag/drop of page_1_column_2_section_1 onto page_1_column_1, inbetween sections 1 and 2 of that column.
