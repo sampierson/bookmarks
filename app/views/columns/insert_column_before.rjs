@@ -5,5 +5,5 @@ page.insert_html :before, existing_container, :partial => 'column', :object => @
 page.rjs_destroy_column_sortables_for_webpage(@webpage, :except_column => @new_column)
 # For some reason calling sort_section_path from a helper, instead of right here, hangs rails.
 # For that reason we create all the data here and pass it to the helper.
-@column_data = @webpage.columns.map { |c| { :droptarget_id => c.droptarget_id, :url =>sort_sections_path(:id => c.id) } }
+@column_data = @webpage.columns.map { |c| { :droptarget_id => c.droptarget_id, :url =>sort_sections_path(:id => c) } }
 page.rjs_create_column_sortables(@column_data)

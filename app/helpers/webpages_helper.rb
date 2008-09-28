@@ -6,7 +6,7 @@ module WebpagesHelper
     all_column_ids = @page.columns.map { |col| col.droptarget_id } 
     @page.columns.map do |column|
       sortable_element(column.droptarget_id,
-        :url          => sort_sections_path(:id => column.id),
+        :url          => sort_sections_path(:id => column),
         :containment  => all_column_ids,
         :dropOnEmpty  => true,
         :hoverclass   => "'hover'" )
@@ -20,7 +20,7 @@ module WebpagesHelper
     all_section_dom_ids = all_sections.map(&:droptarget_id)
     all_sections.map do |section|
       sortable_element(section.droptarget_id,
-        :url          => sort_bookmarks_path(:id => section.id),
+        :url          => sort_bookmarks_path(:id => section),
         :containment  => all_section_dom_ids,
         :dropOnEmpty  => true,
         :hoverclass   => "'hover'" )
