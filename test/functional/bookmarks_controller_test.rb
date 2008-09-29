@@ -55,4 +55,18 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_redirected_to webpage_column_section_path(@w, @c, @s)
   end
 
+  # Test Ajax actions
+  
+  def test_edit_bookmark
+  end
+  
+  def test_update_bookmark
+  end
+  
+  def test_set_legend
+  end
+
+  def test_set_url
+  end
+  
 end
