@@ -1,10 +1,16 @@
 // Colors
 // Using a 5 color palette
-!darker_a = #B3964F
-!lighter_a = #FFE5A4
-!darker_b = #7187C3
-!medium_b = #94ACEF
-!lighter_b = #DEEFFF
+//!darker_a = #B3964F
+//!lighter_a = #FFE5A4
+//!darker_b = #7187C3
+//!medium_b = #94ACEF
+//!lighter_b = #DEEFFF
+
+!darker_a = #B0C3FD
+!lighter_a = #D9E3FD
+!darker_b = #61965A
+!medium_b = #9FC999
+!lighter_b = #F6FCD9
 
 html
   height: 100%
@@ -14,6 +20,9 @@ body
   padding: 0
   height: 100%
 
+legend
+  font-weight: bold
+  
 #lane
   width: 760px
   margin: 0 auto 0 auto 
@@ -178,7 +187,16 @@ ul
 
 .new_section_button
   margin: 0px 0px 5px 5px
-  
+
+#bookmark_edit_pane
+  position: absolute
+  width: 400px
+  height: 150px
+  border: 2px solid orange
+  background-color = !lighter_b
+  padding: 10px
+  z-index: 999
+
 /* Drag and drop
 
 .hover 

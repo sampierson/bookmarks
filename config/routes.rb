@@ -22,6 +22,9 @@ ActionController::Routing::Routes.draw do |map|
     route.set_section_title    ':site/sections/:id/title',      :conditions => { :method => :post   }, :controller => 'sections',  :action => 'set_title'
     route.sort_bookmarks       ':site/sections/:id/sort',       :conditions => { :method => :post   }, :controller => 'sections',  :action => 'sort_bookmarks'
     route.edit_bookmark        ':site/bookmark/:id/edit',       :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'edit_bookmark'
+    route.update_bookmark      ':site/bookmark/:id/update',     :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'update_bookmark'
+    route.set_bookmark_legend  ':site/bookmark/:id/legend',     :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_legend'
+    route.set_bookmark_url     ':site/bookmark/:id/url',        :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_url'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

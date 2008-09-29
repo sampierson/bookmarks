@@ -5,4 +5,5 @@
   %ul.section_sortable{ :id => section.droptarget_id }
     - section.bookmarks.each do |bookmark|
       %li.bookmark_edit{ :id => bookmark.draggable_id }
-        = bookmark.legend
+        = render :partial => "bookmarks/bookmark", :object => bookmark
+        

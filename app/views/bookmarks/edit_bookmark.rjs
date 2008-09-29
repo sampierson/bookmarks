@@ -1,0 +1,8 @@
+page.insert_html :top, 'lane', :partial => 'edit_bookmark', :locals => { :style => 'display: none;' }
+page << "
+var edit_pane_width = 400;
+var bookmark_width = $('#{@bookmark.draggable_id}').getWidth();
+var offsetLeft = bookmark_width/2 - edit_pane_width/2;
+bookmark_edit_pane.clonePosition(#{@bookmark.draggable_id}, { setWidth: false, setHeight: false, offsetLeft: offsetLeft, offsetTop: -50 });
+"
+page.visual_effect(:grow, 'bookmark_edit_pane', :duration => 0.5)
