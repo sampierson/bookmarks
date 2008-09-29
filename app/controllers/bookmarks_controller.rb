@@ -51,7 +51,6 @@ class BookmarksController < ApplicationController
   # Bookmark editing is actually done by in-place editors.
   # This rjs action closes the edit window, and updates the original bookmark.
   def update_bookmark
-    puts "SAM bookmark=#{@bookmark.inspect}"
   end
   
   def set_legend
