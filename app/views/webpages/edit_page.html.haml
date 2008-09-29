@@ -6,7 +6,7 @@
 = render :partial => 'edit_instructions'
 #flash_container
 #columns
-  = render(:partial => 'columns/column', :collection => @page.columns)
+  = render(:partial => 'columns/column', :collection => @webpage.columns)
   #add_column_on_right_button.column_add_button= add_column_on_right_button
 = make_sections_sortable
 = make_columns_sortable

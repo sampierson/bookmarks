@@ -66,7 +66,7 @@ class SectionsController < ApplicationController
     unless params[@section.droptarget_id].blank?
       params[@section.droptarget_id].each do |bookmark_id|
         bookmark = Bookmark.find(bookmark_id)
-        raise "Sorry this bookmark belongs to a different web page" if bookmark.section.column.webpage != @page
+        raise "Sorry this bookmark belongs to a different web page" if bookmark.section.column.webpage != @webpage
         if bookmark.section_id != @section.id
           bookmark.section_id = @section.id
           moved_bookmark = bookmark
@@ -100,8 +100,8 @@ class SectionsController < ApplicationController
   end
   
   def find_section_via_site
-    @page = Webpage.find_by_url(params[:site])
-    @section = @page.sections.find(:first, :conditions => [ 'sections.id = ?', params[:id] ])
+    @webpage = Webpage.find_by_url(params[:site])
+    @section = @webpage.sections.find(:first, :conditions => [ 'sections.id = ?', params[:id] ])
   end
     
 end

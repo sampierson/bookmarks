@@ -56,16 +56,16 @@ class WebpagesController < ApplicationController
   # Users' interface actions
   
   def display_page
-    @page = Webpage.find_by_url(params[:site])
+    @webpage = Webpage.find_by_url(params[:site])
     # SAM handle failure here - redirect to new
-    raise("cannot find a Webpage for site #{params[:site]}") if @page.nil?
+    raise("cannot find a Webpage for site #{params[:site]}") if @webpage.nil?
     render :layout => 'display_page'
   end
   
   def edit_page
-    @page = Webpage.find_by_url(params[:site])
+    @webpage = Webpage.find_by_url(params[:site])
     # SAM handle failure here - redirect to new
-    raise("cannot find a Webpage for site #{params[:site]}") if @page.nil?
+    raise("cannot find a Webpage for site #{params[:site]}") if @webpage.nil?
     render :layout => 'display_page'
   end
     

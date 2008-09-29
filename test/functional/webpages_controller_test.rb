@@ -88,9 +88,9 @@ class WebpagesControllerTest < ActionController::TestCase
     assert_routing({ :path => "/webpage_1", :method => :get },
                    { :controller => 'webpages', :action => 'display_page', :site => 'webpage_1' } )
     get :display_page, :site => 'webpage_1'
-    assert assigns(:page)
+    assert assigns(:webpage)
     w = webpages(:page_1)
-    assert_equal 'webpage_1', assigns(:page).url
+    assert_equal 'webpage_1', assigns(:webpage).url
     assert_select 'body #lane' do
       w.columns.each do |column|
         column.sections.each do |section|
@@ -108,9 +108,9 @@ class WebpagesControllerTest < ActionController::TestCase
     assert_routing({ :path => "/webpage_1/edit", :method => :get },
                    { :controller => 'webpages', :action => 'edit_page', :site => 'webpage_1' } )
     get :edit_page, :site => 'webpage_1'
-    assert assigns(:page)
+    assert assigns(:webpage)
     w = webpages(:page_1)
-    assert_equal 'webpage_1', assigns(:page).url
+    assert_equal 'webpage_1', assigns(:webpage).url
     assert_select 'body #lane #columns' do
       w.columns.each do |column|
         assert_select("##{column.droptarget_id}.column_sortable")
