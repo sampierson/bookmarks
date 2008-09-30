@@ -1,11 +1,10 @@
 #bookmark_edit_pane{ :style => style }
-  Click on field to edit:
-  %p
+  %h3 Edit Bookmark
+  .bookmark_edit_pane_legend_editor
     %span.legend Legend:
     = bookmark_legend_in_place_editor(@bookmark)
-  %p
+  .bookmark_edit_pane_url_editor
     %span.legend Url:
     = bookmark_url_in_place_editor(@bookmark)
-  %br/
   %br/
   = button_to_remote "Done", :url => update_bookmark_path(:id => @bookmark)

@@ -2,5 +2,5 @@ container_id = @column.dom_id + '_and_delete_button'
 column_and_insert_button_id = @column.dom_id + '_and_insert_button'
 # SAM Delete section sortables too
 page.visual_effect(:blind_up, container_id, :duration => 1,
-                   :beforeStart => "function() { Sortable.destroy(#{@column.droptarget_id}); }",
-                   :afterFinish => "function() { #{column_and_insert_button_id}.remove(); }" )
+                   :beforeStart => "function() { Sortable.destroy('#{@column.droptarget_id}'); }",
+                   :afterFinish => "function() { $('#{column_and_insert_button_id}').remove(); }" )

@@ -37,7 +37,38 @@ module ApplicationHelper
       page.visual_effect(:appear, flash_id, :duration => 1)
       page.visual_effect(:blind_down, flash_id, :duration => 1)
       page.visual_effect(:fade, flash_id, :delay => 5, :duration => 1)
-      page.visual_effect(:blind_up, flash_id, :delay => 5, :duration => 1, :afterFinish => "function() { #{flash_id}.remove(); }")
+      page.visual_effect(:blind_up, flash_id, :delay => 5, :duration => 1,
+                         :afterFinish => "function() { $('#{flash_id}').remove(); }")
+    end
+  end
+  
+  # So we can move sections between columns, all coulmns must be listed in the :containment option for the sortable.
+  def make_columns_sortable
+    all_column_ids = @webpage.columns.map { |col| col.droptarget_id } 
+    @webpage.columns.map do |column|
+      sortable_element(column.droptarget_id,
+        :url          => sort_sections_path(:id => column),
+        :containment  => all_column_ids,
+        :dropOnEmpty  => true,
+        :before       => "$('spinner').show();",
+        :after        => "$('spinner').hide();",
+        :hoverclass   => "'hover'" )
+    end
+  end
+  
+  # Note that for nested Scritaculous Sortables to work, the inner sortable must be created first.
+  # i.e. create section sortables before column sortables.
+  def make_sections_sortable
+    all_sections = @webpage.sections
+    all_section_dom_ids = all_sections.map(&:droptarget_id)
+    all_sections.map do |section|
+      sortable_element(section.droptarget_id,
+        :url          => sort_bookmarks_path(:id => section),
+        :containment  => all_section_dom_ids,
+        :dropOnEmpty  => true,
+        :before       => "$('spinner').show();",
+        :after        => "$('spinner').hide();",
+        :hoverclass   => "'hover'" )
     end
   end
   
@@ -73,7 +104,7 @@ module ApplicationHelper
   def rjs_destroy_column_sortables_for_webpage(webpage, options = {})
     webpage.columns.each do |column|
       next if column == options[:except_column]
-      page << "Sortable.destroy(#{column.droptarget_id});"
+      page << "Sortable.destroy($('#{column.droptarget_id}'));"
     end
   end
   
@@ -87,7 +118,7 @@ module ApplicationHelper
   def rjs_destroy_section_sortables_for_column(column, options = {})
     column.sections.each do |section|
       next if section == options[:except_section]
-      page << "Sortable.destroy(#{section.droptarget_id});"
+      page << "Sortable.destroy($('#{section.droptarget_id}'));"
     end
   end
   

@@ -23,7 +23,7 @@ module BookmarksHelper
     "<span id=#{edit_button_id}>#{image_tag('pen.png')}</span>" +
     "<script type='text/javascript'>
     //<![CDATA[
-    new Ajax.InPlaceEditor(#{id}, '#{url}', {externalControl: '#{edit_button_id}', externalControlOnly:true})
+    new Ajax.InPlaceEditor('#{id}', '#{url}', {externalControl: '#{edit_button_id}', externalControlOnly:true})
     //]]>
     </script>"
   end
@@ -40,7 +40,7 @@ module BookmarksHelper
     "<span id=#{edit_button_id}>#{image_tag('pen.png')}</span>" +
     "<script type='text/javascript'>
     //<![CDATA[
-    new Ajax.InPlaceEditor(#{id}, '#{url}', {externalControl: '#{edit_button_id}', externalControlOnly:true})
+    new Ajax.InPlaceEditor('#{id}', '#{url}', {externalControl: '#{edit_button_id}', externalControlOnly:true})
     //]]>
     </script>"
   end
