@@ -56,10 +56,6 @@ class BookmarksControllerTest < ActionController::TestCase
   end
 
   # Test Ajax actions
-  #route.edit_bookmark        ':site/bookmark/:id/edit',       :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'edit_bookmark'
-  #route.update_bookmark      ':site/bookmark/:id/update',     :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'update_bookmark'
-  #route.set_bookmark_legend  ':site/bookmark/:id/legend',     :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_legend'
-  #route.set_bookmark_url     ':site/bookmark/:id/url',        :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_url'
   
   def test_edit_bookmark
     assert_routing({ :path => "/webpage_1/bookmark/#{@b.id}/edit", :method => :post },
