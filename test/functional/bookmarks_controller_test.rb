@@ -56,17 +56,48 @@ class BookmarksControllerTest < ActionController::TestCase
   end
 
   # Test Ajax actions
+  #route.edit_bookmark        ':site/bookmark/:id/edit',       :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'edit_bookmark'
+  #route.update_bookmark      ':site/bookmark/:id/update',     :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'update_bookmark'
+  #route.set_bookmark_legend  ':site/bookmark/:id/legend',     :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_legend'
+  #route.set_bookmark_url     ':site/bookmark/:id/url',        :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_url'
   
   def test_edit_bookmark
+    assert_routing({ :path => "/webpage_1/bookmark/#{@b.id}/edit", :method => :post },
+                   { :controller => 'bookmarks', :action => 'edit_bookmark', :site => 'webpage_1', :id => @b.id.to_s } )
+    xhr :post, :edit_bookmark, :site => 'webpage_1', :id => @b.id
+    assert_response :success
+    assert assigns(:bookmark)
+    assert_select_rjs :insert_html, :top, 'body'
+    assert_select_rjs :insert_html, :top, 'lane', :partial => 'edit_bookmark', :locals => { :style => 'display: none;' }    
   end
   
   def test_update_bookmark
+    assert_routing({ :path => "/webpage_1/bookmark/#{@b.id}/update", :method => :post },
+                   { :controller => 'bookmarks', :action => 'update_bookmark', :site => 'webpage_1', :id => @b.id.to_s } )
+    xhr :post, :update_bookmark, :site => 'webpage_1', :id => @b.id
+    assert_response :success
+    assert assigns(:bookmark)
+    assert_select_rjs :replace_html, @b.draggable_id, :partial => 'bookmark', :object => @b
   end
   
   def test_set_legend
+    assert_routing({ :path => "/webpage_1/bookmark/#{@b.id}/legend", :method => :post },
+                   { :controller => 'bookmarks', :action => 'set_legend', :site => 'webpage_1', :id => @b.id.to_s } )
+    new_legend = random_string(16)
+    xhr :post, :set_legend, :site => 'webpage_1', :id => @b.id, :value => new_legend
+    assert_response :success
+    @b.reload
+    assert_equal new_legend, @b.legend
   end
 
   def test_set_url
+    assert_routing({ :path => "/webpage_1/bookmark/#{@b.id}/url", :method => :post },
+                   { :controller => 'bookmarks', :action => 'set_url', :site => 'webpage_1', :id => @b.id.to_s } )
+    new_url = random_string(16)
+    xhr :post, :set_url, :site => 'webpage_1', :id => @b.id, :value => new_url
+    assert_response :success
+    @b.reload
+    assert_equal new_url, @b.url
   end
   
 end
