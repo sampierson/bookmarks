@@ -48,9 +48,11 @@ module ApplicationHelper
     all_columns = column_data.map { |c| c[:droptarget_id] }
     column_data.each do |cdata|
       page.sortable(cdata[:droptarget_id],
-                    :url => cdata[:url],
-                    :containment => all_columns,
+                    :url          => cdata[:url],
+                    :containment  => all_columns,
                     :dropOnEmpty  => true,
+                    :before       => "$('spinner').show();",
+                    :after        => "$('spinner').hide();",
                     :hoverclass   => "'hover'" )
     end
   end
@@ -59,9 +61,11 @@ module ApplicationHelper
     all_sections = section_data.map { |s| s[:droptarget_id] }
     column_data.each do |cdata|
       page.sortable(cdata[:droptarget_id],
-                    :url => cdata[:url],
-                    :containment => all_sections,
+                    :url          => cdata[:url],
+                    :containment  => all_sections,
                     :dropOnEmpty  => true,
+                    :before       => "$('spinner').show();",
+                    :after        => "$('spinner').hide();",
                     :hoverclass   => "'hover'" )
     end
   end

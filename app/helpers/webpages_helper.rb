@@ -9,6 +9,8 @@ module WebpagesHelper
         :url          => sort_sections_path(:id => column),
         :containment  => all_column_ids,
         :dropOnEmpty  => true,
+        :before       => "$('spinner').show();",
+        :after        => "$('spinner').hide();",
         :hoverclass   => "'hover'" )
     end
   end
@@ -23,6 +25,8 @@ module WebpagesHelper
         :url          => sort_bookmarks_path(:id => section),
         :containment  => all_section_dom_ids,
         :dropOnEmpty  => true,
+        :before       => "$('spinner').show();",
+        :after        => "$('spinner').hide();",
         :hoverclass   => "'hover'" )
     end
   end

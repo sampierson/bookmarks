@@ -10,4 +10,6 @@
     = javascript_include_tag :defaults
   %body#body
     #lane
+      #spinner{ :style => 'display: none;' }
+        = image_tag('spinner.gif')
       = yield

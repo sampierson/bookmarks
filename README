@@ -4,12 +4,12 @@ How to rewrite my homepage in Rails, Web 2.0 Style.
 This is an exercise in exercising Ajax.
 
 Features:
-  Ajax editing page.
-  Nested Sortables.
-  restful_authentication
-  LiveValidation?
-  Page caching.
-  RDOC
+  DONE  Ajax editing page.
+  DONE  Nested Sortables.
+        restful_authentication
+        LiveValidation?
+        Page caching.
+        RDOC
   
 TODO
   Write official CSS id/class naming policy.
@@ -18,19 +18,19 @@ TODO
   What to do when a page/column etc does not exist.
 
 Functionality:
-  Display Page
-  Jump to Edit Page
+  Display Page                        done
+  Jump to Edit Page                   done
   New Page
-  Column Insert
+  Column Insert                       done
   Column Delete                       done
-  Section Insert
-  Section Delete
+  Section Insert                      done
+  Section Delete                      done
   Section Move                        done
-  Section Edit (title)
+  Section Edit (title)                done
   Bookmark Insert
   Bookmark Delete
   Bookmark Move                       done
-  Bookmark Edit (legend, url)
+  Bookmark Edit (legend, url)         done
 
 
 
