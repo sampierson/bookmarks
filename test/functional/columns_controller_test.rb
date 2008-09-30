@@ -133,7 +133,7 @@ class ColumnsControllerTest < ActionController::TestCase
     assert_response :success
     column_and_insert_button_id = col_to_del.dom_id + '_and_insert_button'
     # Only Scriptaculous. Can't test with assert_select_rjs.
-    assert_match /afterFinish:function\(\) \{ #{column_and_insert_button_id}\.remove\(\); \}/, @response.body
+    assert_match /afterFinish:function\(\) \{ \$\('#{column_and_insert_button_id}'\)\.remove\(\); \}/, @response.body
   end
   
 end
