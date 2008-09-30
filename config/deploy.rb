@@ -17,3 +17,7 @@ role :web, "sampierson.net"
 role :db,  "sampierson.net", :primary => true
 
 set :use_sudo, false
+
+task :after_update_code do
+  run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/"
+end
