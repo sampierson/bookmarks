@@ -14,17 +14,20 @@ ActionController::Routing::Routes.draw do |map|
     route.display_page ':site/',     :conditions => { :method => :get }, :controller => 'webpages', :action => 'display_page'
     route.edit_page    ':site/edit', :conditions => { :method => :get }, :controller => 'webpages', :action => 'edit_page'
     # The Ajax routes
-    route.insert_column_before ':site/columns/:id/before',      :conditions => { :method => :post   }, :controller => 'columns',   :action => 'insert_column_before'
-    route.add_column_on_right  ':site/columns/new',             :conditions => { :method => :post   }, :controller => 'columns',   :action => 'add_column_on_right'
-    route.delete_column        ':site/columns/:id',             :conditions => { :method => :delete }, :controller => 'columns',   :action => 'delete_column'
-    route.sort_sections        ':site/columns/:id/sort',        :conditions => { :method => :post   }, :controller => 'columns',   :action => 'sort_sections'
-    route.new_section          ':site/sections/:column_id/new', :conditions => { :method => :post   }, :controller => 'sections',  :action => 'new_section'
-    route.set_section_title    ':site/sections/:id/title',      :conditions => { :method => :post   }, :controller => 'sections',  :action => 'set_title'
-    route.sort_bookmarks       ':site/sections/:id/sort',       :conditions => { :method => :post   }, :controller => 'sections',  :action => 'sort_bookmarks'
-    route.edit_bookmark        ':site/bookmark/:id/edit',       :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'edit_bookmark'
-    route.update_bookmark      ':site/bookmark/:id/update',     :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'update_bookmark'
-    route.set_bookmark_legend  ':site/bookmark/:id/legend',     :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_legend'
-    route.set_bookmark_url     ':site/bookmark/:id/url',        :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_url'
+    route.insert_column_before ':site/columns/:id/before',        :conditions => { :method => :post   }, :controller => 'columns',   :action => 'insert_column_before'
+    route.add_column_on_right  ':site/columns/new',               :conditions => { :method => :post   }, :controller => 'columns',   :action => 'add_column_on_right'
+    route.delete_column        ':site/columns/:id',               :conditions => { :method => :delete }, :controller => 'columns',   :action => 'delete_column'
+    route.sort_sections        ':site/columns/:id/sort',          :conditions => { :method => :post   }, :controller => 'columns',   :action => 'sort_sections'
+                                                                  
+    route.new_section          ':site/sections/:column_id/new',   :conditions => { :method => :post   }, :controller => 'sections',  :action => 'new_section'
+    route.set_section_title    ':site/sections/:id/title',        :conditions => { :method => :post   }, :controller => 'sections',  :action => 'set_title'
+    route.sort_bookmarks       ':site/sections/:id/sort',         :conditions => { :method => :post   }, :controller => 'sections',  :action => 'sort_bookmarks'
+
+    route.new_bookmark         ':site/bookmarks/:section_id/new', :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'new_bookmark'
+    route.edit_bookmark        ':site/bookmarks/:id/edit',        :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'edit_bookmark'
+    route.update_bookmark      ':site/bookmarks/:id/update',      :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'update_bookmark'
+    route.set_bookmark_legend  ':site/bookmarks/:id/legend',      :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_legend'
+    route.set_bookmark_url     ':site/bookmarks/:id/url',         :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_url'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

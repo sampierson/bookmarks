@@ -6,4 +6,6 @@
     - section.bookmarks.each do |bookmark|
       %li.bookmark_edit{ :id => bookmark.draggable_id }
         = render :partial => "bookmarks/bookmark", :object => bookmark
+  .new_bookmark_link
+    = new_bookmark_link(section)
         

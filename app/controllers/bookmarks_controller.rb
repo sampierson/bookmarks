@@ -45,6 +45,14 @@ class BookmarksController < ApplicationController
 
   # Users' interface Ajax actions
   
+  def new_bookmark
+    @webpage = Webpage.find_by_url(params[:site])
+    @section = @webpage.sections.find(params[:section_id])
+    @new_bookmark = @section.bookmarks.create(:legend => "New Bookmark",
+                                              :url => '',
+                                              :nth_from_top_of_section => @section.bookmarks.size+1)
+  end
+  
   def edit_bookmark
   end
   
