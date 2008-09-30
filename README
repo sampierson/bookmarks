@@ -8,31 +8,35 @@ Features:
   DONE  Nested Sortables.
         restful_authentication
         LiveValidation?
-        Page caching.
+        Page/fragment caching.
         RDOC
   
 TODO
+  Fix scriptaculous stacking flash messages.
   Write official CSS id/class naming policy.
   Align ids.
-  Send unimplemented actions somewhere? back to preceeding controller?
+  Send unimplemented actions somewhere? back to preceding controller?
   What to do when a page/column etc does not exist.
 
 Functionality:
   Display Page                        done
   Jump to Edit Page                   done
-  New Page
+  Back to Display Page                
+  New Page                            
+  Page Preferences: colors            
   Column Insert                       done
   Column Delete                       done
   Section Insert                      done
   Section Delete                      done
   Section Move                        done
   Section Edit (title)                done
-  Bookmark Insert
-  Bookmark Delete
+  Bookmark Insert                     done
+  Bookmark Delete                     
   Bookmark Move                       done
   Bookmark Edit (legend, url)         done
-
-
+  Bookmark Upload Image               
+  Admin interface
+    view other people's pages         
 
 Structure
   page ->
