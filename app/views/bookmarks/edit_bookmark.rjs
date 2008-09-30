@@ -1,3 +1,4 @@
+page.insert_html :top, 'lane', "<div id=greypage>Hello!</div>"
 page.insert_html :top, 'lane', :partial => 'edit_bookmark', :locals => { :style => 'display: none;' }
 page << "
 var edit_pane_width = 400;

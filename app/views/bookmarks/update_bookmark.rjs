@@ -1,5 +1,4 @@
+page.replace_html @bookmark.draggable_id, :partial => 'bookmark', :object => @bookmark
 page.visual_effect(:fade, 'bookmark_edit_pane',
                    :duration => 0.5,
-                   :afterFinish => "function() { $('bookmark_edit_pane').remove(); }")
-page.replace_html @bookmark.draggable_id, :partial => 'bookmark', :object => @bookmark
-
+                   :afterFinish => "function() { $('bookmark_edit_pane').remove(); $('greypage').remove(); }")
