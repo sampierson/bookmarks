@@ -1,9 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+
   
   # Administrative interface (scaffold).
+  # I don't use a namespace here as use the same controller for the scaffold and for Ajax calls.
+  #map.newish_image '/admin/images/newish', :conditions => { :method => :get }, :controller => 'images', :action => 'newish'
+  map.resources :images, :path_prefix => '/admin'
+  
   map.resources :webpages, :path_prefix => '/admin' do |webpage|
     webpage.resources :columns do |column|
-      column.resources :sections do |section|        
+      column.resources :sections do |section|
         section.resources :bookmarks
       end
     end
@@ -22,12 +27,15 @@ ActionController::Routing::Routes.draw do |map|
     route.new_section          ':site/sections/:column_id/new',   :conditions => { :method => :post   }, :controller => 'sections',  :action => 'new_section'
     route.set_section_title    ':site/sections/:id/title',        :conditions => { :method => :post   }, :controller => 'sections',  :action => 'set_title'
     route.sort_bookmarks       ':site/sections/:id/sort',         :conditions => { :method => :post   }, :controller => 'sections',  :action => 'sort_bookmarks'
-
+                                                                  
     route.new_bookmark         ':site/bookmarks/:section_id/new', :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'new_bookmark'
     route.edit_bookmark        ':site/bookmarks/:id/edit',        :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'edit_bookmark'
     route.update_bookmark      ':site/bookmarks/:id/update',      :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'update_bookmark'
     route.set_bookmark_legend  ':site/bookmarks/:id/legend',      :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_legend'
     route.set_bookmark_url     ':site/bookmarks/:id/url',         :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'set_url'
+    route.bookmark_img_new     ':site/bookmarks/:id/image/new',   :conditions => { :method => :get    }, :controller => 'bookmarks', :action => 'new_image'
+    route.bookmark_img_create  ':site/bookmarks/:id/image',       :conditions => { :method => :post   }, :controller => 'bookmarks', :action => 'create_image'
+    route.bookmark_img_delete  ':site/bookmarks/:id/image',       :conditions => { :method => :delete }, :controller => 'bookmarks', :action => 'delete_image'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

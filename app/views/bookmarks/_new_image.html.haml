@@ -1,0 +1,11 @@
+-# Stop Safari caching IFRAME by changing its name every time.
+- iframe_name = "upload_frame_#{Time.now.to_i}"
+- form_for(@bookmark, :url => bookmark_img_create_path(:id => @bookmark), :html => { :target => iframe_name, :method => :post, :multipart => true }) do |f|
+  = f.error_messages
+  %p
+    = f.label :image
+    %b
+    = f.file_field :uploaded_data
+  %p
+    = f.submit "Upload"
+%iframe{ :id => "upload_frame", :name => iframe_name, :style => "height:0;width:0;border:0;", :src => '"about:blank"' }

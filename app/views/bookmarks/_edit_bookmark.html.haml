@@ -2,9 +2,12 @@
   %h3 Edit Bookmark
   .bookmark_edit_pane_legend_editor
     %span.legend Legend:
-    = bookmark_legend_in_place_editor(@bookmark)
+    = my_in_place_editor_for(@bookmark, :legend)
   .bookmark_edit_pane_url_editor
     %span.legend Url:
-    = bookmark_url_in_place_editor(@bookmark)
+    -# bookmark_url_in_place_editor(@bookmark)
+    = my_in_place_editor_for(@bookmark, :url)
+  %br/
+  = render :partial => 'image'
   %br/
   = button_to_remote "Done", :url => update_bookmark_path(:id => @bookmark)

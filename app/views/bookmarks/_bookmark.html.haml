@@ -1,2 +1,6 @@
-=bookmark.legend
+- if bookmark.image
+  = image_tag(bookmark.image.public_filename)
+- else
+  = bookmark.legend
+-# It would be nice to emulate the Ajax.InPlaceEditor onmouseover and onmouseout functionality here
 =link_to_remote image_tag('pen.png'), :url => edit_bookmark_path(:id => bookmark)

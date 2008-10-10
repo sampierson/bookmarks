@@ -5,32 +5,27 @@ page_1_col_1_sec_1_mark_1:
   nth_from_top_of_section: 1
   legend: page_1_col_1_sec_1_mark_1
   url: page_1_col_1_sec_1_mark_1_url
-  image: page_1_col_1_sec_1_mark_1_img
 
 page_1_col_1_sec_1_mark_2:
   section: page_1_col_1_sec_1
   nth_from_top_of_section: 2
   legend: page_1_col_1_sec_1_mark_2
   url: page_1_col_1_sec_1_mark_2_url
-  image: page_1_col_1_sec_1_mark_2_img
 
 page_1_col_1_sec_2_mark_1:
   section: page_1_col_1_sec_2
   nth_from_top_of_section: 1
   legend: page_1_col_1_sec_2_mark_1
   url: page_1_col_1_sec_2_mark_1_url
-  image: page_1_col_1_sec_2_mark_1_img
 
 page_1_col_2_sec_1_mark_1:
   section: page_1_col_2_sec_1
   nth_from_top_of_section: 1
   legend: page_1_col_2_sec_1_mark_1
   url: page_1_col_2_sec_1_mark_1_url
-  image: page_1_col_2_sec_1_mark_1_img
 
 page_2_col_1_sec_1_mark_1:
   section: page_2_col_1_sec_1
   nth_from_top_of_section: 1
   legend: page_2_col_1_sec_1_mark_1
   url: page_2_col_1_sec_1_mark_1_url
-  image: page_2_col_1_sec_1_mark_1_img

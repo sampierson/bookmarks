@@ -9,14 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080916185313) do
+ActiveRecord::Schema.define(:version => 20081010012546) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "section_id",              :null => false
     t.integer  "nth_from_top_of_section", :null => false
     t.string   "legend",                  :null => false
     t.string   "url"
-    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,6 +30,21 @@ ActiveRecord::Schema.define(:version => 20080916185313) do
   end
 
   add_index "columns", ["webpage_id"], :name => "index_columns_on_webpage_id"
+
+  create_table "images", :force => true do |t|
+    t.integer  "bookmark_id"
+    t.integer  "size"
+    t.string   "content_type"
+    t.string   "filename"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "parent_id"
+    t.string   "thumbnail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["bookmark_id"], :name => "index_images_on_bookmark_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "column_id",            :null => false

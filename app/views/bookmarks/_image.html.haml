@@ -1,0 +1,8 @@
+#bookmark_image_container
+  - if @bookmark.image
+    = image_tag(@bookmark.image.public_filename, :align => 'top')
+    %span.image_delete_button
+      %span.column_otimes
+        = image_delete_button(@bookmark)
+  - else
+    = insert_image_form_link(@bookmark)

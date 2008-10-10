@@ -3,7 +3,9 @@ class BookmarksController < ApplicationController
   layout 'admin'
   
   before_filter :find_section_via_webpage, :only => [ :show, :new, :edit, :create, :update, :destroy ]
-  before_filter :find_bookmark_via_site,    :only => [ :edit_bookmark, :update_bookmark, :set_legend, :set_url ]
+  before_filter :find_bookmark_via_site,    :only => [ :edit_bookmark, :update_bookmark,
+                                                       :set_legend, :set_url,
+                                                       :new_image, :create_image, :delete_image ]
 
   # Administrative interface REST CRUD scaffold actions
   
@@ -69,6 +71,23 @@ class BookmarksController < ApplicationController
   def set_url
     @bookmark.update_attribute(:url, params[:value])
     render :text => @bookmark.send(:url).to_s
+  end
+  
+  # Uses RJS to render a file-upload form
+  def new_image
+  end
+  
+  def create_image
+    image = @bookmark.create_image
+    image.update_attributes(params[:bookmark])
+    responds_to_parent do
+      render
+    end
+  end
+  
+  def delete_image
+    @bookmark.image.destroy
+    @bookmark.reload
   end
   
   private

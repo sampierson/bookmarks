@@ -20,7 +20,26 @@ module ApplicationHelper
     options.merge!(:html => {:class => 'button-to'})
     form_remote_tag(options) + method_tag + before_html + tag("button", html_options, true) + name + '</button>' + after_html + '</form>'
   end
-   
+  
+  def my_in_place_editor_for(object, attribute)
+    object_name = object.class.name.downcase
+    route_function = "set_#{object_name}_#{attribute}_path"
+    if protect_against_forgery?
+      url = self.send(route_function, :id => object, :authenticity_token => form_authenticity_token)
+    else
+      url = self.send(route_function, :id => object)
+    end
+    field_id       = "#{object_name}_#{object.id}_#{attribute}_in_place_editor"
+    edit_button_id = "#{object_name}_#{object.id}_#{attribute}_edit"
+    "<span class=in_place_editor_field id=#{field_id}>#{object.send(attribute)}</span>&nbsp;" +
+    "<span id=#{edit_button_id}>#{image_tag('pen.png')}</span>" +
+    "<script type='text/javascript'>
+    //<![CDATA[
+    new Ajax.InPlaceEditor('#{field_id}', '#{url}', {externalControl: '#{edit_button_id}', externalControlOnly:true})
+    //]]>
+    </script>"
+  end
+ 
   # Routines that must be called from the context of a JavaScript Generator (variable 'page' is set).
   
   def ajax_flash_message(message)

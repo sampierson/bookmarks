@@ -1,5 +1,6 @@
 class Bookmark < ActiveRecord::Base
   belongs_to :section
+  has_one :image
   validates_numericality_of :nth_from_top_of_section, :only_integer => true
   validates_presence_of :legend
   validate :section_must_exist
