@@ -56,14 +56,18 @@ class WebpagesController < ApplicationController
   # Users' interface actions
   
   def display_page
-    @webpage = Webpage.find_by_url(params[:site])
+    @webpage = Webpage.find(:first,
+                            :conditions => [ 'url = ?', params[:site] ],
+                            :include => { :columns => { :sections => { :bookmarks => :image } } } )
     # SAM handle failure here - redirect to new
     raise("cannot find a Webpage for site #{params[:site]}") if @webpage.nil?
     render :layout => 'display_page'
   end
   
   def edit_page
-    @webpage = Webpage.find_by_url(params[:site])
+    @webpage = Webpage.find(:first,
+                            :conditions => [ 'url = ?', params[:site] ],
+                            :include => { :columns => { :sections => { :bookmarks => :image } } } )
     # SAM handle failure here - redirect to new
     raise("cannot find a Webpage for site #{params[:site]}") if @webpage.nil?
     render :layout => 'display_page'
