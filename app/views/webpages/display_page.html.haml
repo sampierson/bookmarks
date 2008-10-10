@@ -12,7 +12,10 @@
         - section.bookmarks.each do |bookmark|
           .bookmark
             %a{ :href => bookmark.url }
-              = bookmark.legend
+              - if bookmark.image
+                = image_tag(bookmark.image.public_filename)
+              - else
+                = bookmark.legend
 %br/
 =link_to 'Edit Page', edit_page_path
   
