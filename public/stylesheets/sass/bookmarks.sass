@@ -12,6 +12,27 @@
 !medium_b = #9FC999
 !lighter_b = #F6FCD9
 
+/* Clearfix
+
+/* This needs to be first because FF3 is now supporting this
+.clearfix
+  display: inline-block
+
+.clearfix:after
+  content: " "
+  display: block
+  height: 0
+  clear: both
+  font-size: 0
+  visibility: hidden
+
+/* Hides from IE-mac
+* html .clearfix
+  height: 1%
+.clearfix
+  display: block
+/* End hide from IE-mac
+
 html
   height: 100%
 
@@ -186,9 +207,12 @@ ul
 .column_sortable
   min-height: 100px
   min-width: 150px
+  width: 150px
   padding: 5px
   cursor: -moz-grab
 
+#add_column_on_right_button
+  
 .section_title_and_sortable
   background-color = !medium_b
   cursor: move
@@ -211,6 +235,10 @@ ul
 
 .new_section_button
   margin: 0px 0px 5px 5px
+
+#done
+  text-align: center
+  margin-top: 40px
 
 /* _edit_bookmark.html
 
