@@ -4,8 +4,5 @@
   = f.error_messages
   %p
     = f.label :image
-    %b
-    = f.file_field :uploaded_data
-  %p
-    = f.submit "Upload"
+    = f.file_field :uploaded_data, :onchange => "form.submit();"
 %iframe{ :id => "upload_frame", :name => iframe_name, :style => "height:0;width:0;border:0;", :src => '"about:blank"' }
