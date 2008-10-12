@@ -77,7 +77,7 @@ class ColumnsController < ApplicationController
     if moved_section
       moved_section.reload
       render :update do |page|
-        page.ajax_flash_message "Section #{moved_section.title} moved to column #{moved_section.column.nth_from_left}"
+        #page.ajax_flash_message "Section #{moved_section.title} moved to column #{moved_section.column.nth_from_left}"
       end
     else
       render :text => ''

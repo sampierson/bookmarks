@@ -78,7 +78,7 @@ class SectionsController < ApplicationController
     end
     if moved_bookmark
       render :update do |page|
-        page.ajax_flash_message "Bookmark #{moved_bookmark.legend} moved to section #{@section.title}"
+        #page.ajax_flash_message "Bookmark #{moved_bookmark.legend} moved to section #{@section.title}"
       end
     else
       render :text => ""
