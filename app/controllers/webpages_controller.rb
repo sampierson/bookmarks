@@ -57,7 +57,7 @@ class WebpagesController < ApplicationController
   
   def display_page
     @webpage = Webpage.find(:first,
-                            :conditions => [ 'url = ?', params[:site] ],
+                            :conditions => { :url => params[:site] },
                             :include => { :columns => { :sections => { :bookmarks => :image } } } )
     # SAM handle failure here - redirect to new
     raise("cannot find a Webpage for site #{params[:site]}") if @webpage.nil?
@@ -66,7 +66,7 @@ class WebpagesController < ApplicationController
   
   def edit_page
     @webpage = Webpage.find(:first,
-                            :conditions => [ 'url = ?', params[:site] ],
+                            :conditions => { :url => params[:site] },
                             :include => { :columns => { :sections => { :bookmarks => :image } } } )
     # SAM handle failure here - redirect to new
     raise("cannot find a Webpage for site #{params[:site]}") if @webpage.nil?

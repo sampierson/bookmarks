@@ -52,7 +52,7 @@ class ColumnsController < ApplicationController
 
   # Reorder sections in a column and/or move section into column.
   # Parameters are:
-  #  'id'                  => x
+  #  'id'                  => x  (id of drop-target column)
   #  'droptargetColumn_x'  => [ array of section IDs ]
   # Note we can get called for a column that is now empty.
   def sort_sections
@@ -101,7 +101,7 @@ class ColumnsController < ApplicationController
   
   # Insert a new column on the far right hand side
   def add_column_on_right
-    current_rightmost_column = Column.maximum(:nth_from_left, :conditions => "webpage_id = #{@webpage.id}")
+    current_rightmost_column = Column.maximum(:nth_from_left, :conditions => { :webpage_id => @webpage.id })
     new_column_position = (current_rightmost_column || 0) + 1
     @new_column = @webpage.columns.create(:nth_from_left => new_column_position)
   end
