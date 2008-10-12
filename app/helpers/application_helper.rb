@@ -120,6 +120,8 @@ module ApplicationHelper
     end
   end
   
+  # SAM: potential performance optimization: Instead of ennumerating columns via a DB search,
+  # rewrite to do a serach in JavaScript for DOM IDs matching a particualr pattern.
   def rjs_destroy_column_sortables_for_webpage(webpage, options = {})
     webpage.columns.each do |column|
       next if column == options[:except_column]
@@ -127,6 +129,8 @@ module ApplicationHelper
     end
   end
   
+  # SAM: potential performance optimization: Instead of ennumerating sections via a DB search,
+  # rewrite to do a serach in JavaScript for DOM IDs matching a particualr pattern.
   def rjs_destroy_section_sortables_for_webpage(webpage, options = {})
     webpage.columns.each do |column|
       next if column == options[:except_column]
@@ -134,6 +138,8 @@ module ApplicationHelper
     end
   end
   
+  # SAM: potential performance optimization: Instead of ennumerating sections via a DB search,
+  # rewrite to do a serach in JavaScript for DOM IDs matching a particualr pattern.
   def rjs_destroy_section_sortables_for_column(column, options = {})
     column.sections.each do |section|
       next if section == options[:except_section]
