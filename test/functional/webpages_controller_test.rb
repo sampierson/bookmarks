@@ -118,7 +118,7 @@ class WebpagesControllerTest < ActionController::TestCase
           assert_select("li##{section.draggable_id}.section_title_and_sortable")
           assert_select("ul##{section.droptarget_id}.section_sortable")
           section.bookmarks.each do |bookmark|
-            assert_select("li##{bookmark.draggable_id}.bookmark_edit")
+            assert_select("li##{bookmark.draggable_id}.bookmark_editable")
           end
         end
       end

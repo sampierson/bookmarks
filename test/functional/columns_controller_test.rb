@@ -103,7 +103,8 @@ class ColumnsControllerTest < ActionController::TestCase
     assert_equal droptarget, dragged_section.column
     assert_equal 2, dragged_section.nth_section_from_top
     # Check for rjs commands
-    assert_select_rjs :insert_html, :bottom, 'flash_container'
+    # Ajax flash messages are currently disabled
+    # assert_select_rjs :insert_html, :bottom, 'flash_container'
   end
 
   def test_insert_column_before
