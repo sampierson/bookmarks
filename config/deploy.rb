@@ -20,4 +20,5 @@ set :use_sudo, false
 
 task :after_update_code do
   run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/"
+  run "ln -s #{shared_path}/images/0000 #{release_path}/public/images/"
 end
