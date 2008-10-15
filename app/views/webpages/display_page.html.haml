@@ -14,7 +14,7 @@
             - if bookmark.url.blank?
               = bookmark.legend
             - else
-              %a{ :href => bookmark.url, :target => 'top' }
+              %a{ :href => bookmark.url, :target => '_top' }
                 - if bookmark.image
                   = image_tag(bookmark.image.public_filename)
                 - else
