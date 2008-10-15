@@ -11,11 +11,14 @@
           = section.title
         - section.bookmarks.each do |bookmark|
           .bookmark
-            %a{ :href => bookmark.url }
-              - if bookmark.image
-                = image_tag(bookmark.image.public_filename)
-              - else
-                = bookmark.legend
+            - if bookmark.url.blank?
+              = bookmark.legend
+            - else
+              %a{ :href => bookmark.url, :target => 'parent' }
+                - if bookmark.image
+                  = image_tag(bookmark.image.public_filename)
+                - else
+                  = bookmark.legend
 %br/
 =link_to 'Edit Page', edit_page_path
   
