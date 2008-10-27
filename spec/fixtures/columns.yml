@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+page_1_col_1:
+  webpage: page_1
+  nth_from_left: 1
+
+page_1_col_2:
+  webpage: page_1
+  nth_from_left: 2
+
+page_2_col_1:
+  webpage: page_2
+  nth_from_left: 1

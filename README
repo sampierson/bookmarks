@@ -9,8 +9,13 @@ Features:
         restful_authentication
         LiveValidation?
         Page/fragment caching.
+Chores:
+        Switch from Test::Unit to RSpec
+        Switch from Scriptaculous to JQuery
         RDOC
-  
+        
+Those first two chores pretty much require a rewrite from scratch.
+
 TODO
   Fix scriptaculous stacking flash messages.
   Write official CSS id/class naming policy.
@@ -21,7 +26,7 @@ TODO
 Functionality:
   Display Page                        done
   Jump to Edit Page                   done
-  Back to Display Page                
+  Back to Display Page                done
   New Page                            
   Page Preferences: colors            
   Column Insert                       done
@@ -34,7 +39,7 @@ Functionality:
   Bookmark Delete                     
   Bookmark Move                       done
   Bookmark Edit (legend, url)         done
-  Bookmark Upload Image               
+  Bookmark Upload Image               done
   Admin interface
     view other people's pages         
 

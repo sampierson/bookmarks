@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-
   
   # Administrative interface (scaffold).
   # I don't use a namespace here as use the same controller for the scaffold and for Ajax calls.
